@@ -57,14 +57,14 @@ export default function OceanParticles() {
   return (
     <>
       <ParticleLayer
-        count={1000}
+        count={8000}
         size={0.008}
         color="#E8F4FF"
         spread={[100, 100, 100]}
         speed={0.1}
       />
       <ParticleLayer
-        count={800}
+        count={2000}
         size={0.025}
         color="#1BFFD3"
         spread={[30, 80, 30]}
@@ -72,7 +72,7 @@ export default function OceanParticles() {
       />
       {/* Feature stars — large, bright, few */}
       <ParticleLayer
-        count={20}
+        count={60}
         size={0.08}
         color="#FFFFFF"
         spread={[80, 60, 80]}

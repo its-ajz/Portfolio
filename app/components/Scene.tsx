@@ -3,7 +3,7 @@
 import { useRef } from 'react'
 import { Canvas } from '@react-three/fiber'
 import { EffectComposer, Bloom, Vignette, ChromaticAberration } from '@react-three/postprocessing'
-//import { BlendFunction } from 'postprocessing'
+import { BlendFunction } from 'postprocessing'
 import * as THREE from 'three'
 import OceanParticles from './OceanParticles'
 import Constellations from './Constellations'
@@ -38,6 +38,12 @@ export default function Scene() {
       <JellyfishNavigator jellyfishPos={jellyfishPos} />
       <ProjectNodes jellyfishPos={jellyfishPos} />
       <ZoneLabels />
+      <EffectComposer>
+        <Bloom intensity={2} luminanceThreshold={0.15} luminanceSmoothing={0.9} mipmapBlur />
+        <Vignette offset={0.3} darkness={0.7} blendFunction={BlendFunction.NORMAL} />
+        <ChromaticAberration offset={[0.0008, 0.0008]} blendFunction={BlendFunction.NORMAL} />
+      </EffectComposer>
+      
 
       
     </Canvas>

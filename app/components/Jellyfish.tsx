@@ -7,7 +7,7 @@ import * as THREE from 'three'
 const TENTACLE_COUNT = 8
 
 function Tentacle({ index }: { index: number }) {
-  const segments = 4
+  const segments = 12
   const meshRefs = useRef<(THREE.Mesh | null)[]>([])
   const angle = (index / TENTACLE_COUNT) * Math.PI * 2
 
