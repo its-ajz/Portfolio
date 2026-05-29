@@ -2,15 +2,28 @@
 
 import { useState, useEffect } from 'react'
 import Scene from './components/Scene'
-import ControlsHint from './components/ControlsHint'
+import NavBar from './components/NavBar'
 import IntroScreen from './components/IntroScreen'
+import ScrollHint from './components/ScrollHint'
+import AboutSection from './components/AboutSection'
+import ContactSection from './components/ContactSection'
 import ProjectModal from './components/ProjectModal'
 import CustomCursor from './components/CustomCursor'
 import { ProjectData } from './data/project'
 
 export default function Home() {
-  const [started, setStarted]           = useState(false)
+  const [started, setStarted] = useState(false)
   const [activeProject, setActiveProject] = useState<ProjectData | null>(null)
+  const [scrollT, setScrollT] = useState(0)
+
+  useEffect(() => {
+    const onScroll = () => {
+      const max = document.documentElement.scrollHeight - window.innerHeight
+      setScrollT(max > 0 ? window.scrollY / max : 0)
+    }
+    window.addEventListener('scroll', onScroll, { passive: true })
+    return () => window.removeEventListener('scroll', onScroll)
+  }, [])
 
   useEffect(() => {
     const handler = (e: Event) => {
@@ -21,17 +34,37 @@ export default function Home() {
   }, [])
 
   return (
-    <main style={{ width: '100vw', height: '100vh', position: 'relative' }}>
+    <>
+      {/* Scroll height — drives the 3D scene */}
+      <div style={{ height: '900vh', pointerEvents: 'none' }} />
+
+      {/* Fixed 3D canvas */}
+      <div style={{ position: 'fixed', inset: 0, zIndex: 0 }}>
+        <Scene />
+      </div>
+
       <CustomCursor />
-      <Scene />
+
+      {/* Intro — shown before started */}
       {!started && <IntroScreen onEnter={() => setStarted(true)} />}
-      {started && !activeProject && <ControlsHint />}
+
+      {/* Everything below only after entering */}
+      {started && (
+        <>
+          <NavBar scrollT={scrollT} />
+          <ScrollHint />
+          <AboutSection scrollT={scrollT} />
+          <ContactSection scrollT={scrollT} />
+        </>
+      )}
+
+      {/* Project modal */}
       {activeProject && (
         <ProjectModal
           project={activeProject}
           onClose={() => setActiveProject(null)}
         />
       )}
-    </main>
+    </>
   )
 }
