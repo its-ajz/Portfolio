@@ -77,7 +77,7 @@ function OralArm({ index }: { index: number }) {
       geoRef.current.attributes.position.needsUpdate = true
     } else {
       if (!meshRef.current) return
-      const newGeo = new THREE.TubeGeometry(new THREE.CatmullRomCurve3(points), SEGS, 0.055, 6, false)
+      const newGeo = new THREE.TubeGeometry(new THREE.CatmullRomCurve3(points), SEGS, 0.035, 6, false)
       if (meshRef.current.geometry) meshRef.current.geometry.dispose()
       meshRef.current.geometry = newGeo
     }
@@ -142,14 +142,25 @@ export default function Jellyfish() {
   const isMobile = useIsMobile()
 
   useFrame((state) => {
-    if (!groupRef.current || !bellRef.current) return
-    const t     = state.clock.elapsedTime
-    const pulse = Math.sin(t * 1.2) * 0.1
-    bellRef.current.scale.y = 1 + pulse
-    bellRef.current.scale.x = 1 - pulse * 0.5
-    bellRef.current.scale.z = 1 - pulse * 0.5
-    groupRef.current.position.y = Math.sin(t * 0.5) * 0.2
-  })
+  if (!groupRef.current || !bellRef.current) return
+  const t = state.clock.elapsedTime
+
+  // Bell pulse — propulsion squish
+  const pulse = Math.sin(t * 1.2) * 0.1
+  bellRef.current.scale.y = 1 + pulse
+  bellRef.current.scale.x = 1 - pulse * 0.5
+  bellRef.current.scale.z = 1 - pulse * 0.5
+
+  // Organic drift — tilts and sways like it's floating in current
+  groupRef.current.position.y = Math.sin(t * 0.5) * 0.25
+  groupRef.current.position.x = Math.sin(t * 0.35) * 0.18
+
+  // Gentle lean side to side
+  groupRef.current.rotation.z = Math.sin(t * 0.4)  * 0.12
+
+  // Subtle forward/back lean
+  groupRef.current.rotation.x = Math.sin(t * 0.28 + 1) * 0.08
+})
 
   return (
     <group ref={groupRef}>
@@ -205,22 +216,16 @@ export default function Jellyfish() {
         <meshBasicMaterial color="#1BFFD3" transparent opacity={0.85} />
       </mesh>
 
-      {/* Inner glow ring */}
-      <mesh position={[0, -0.05, 0]}>
-        <torusGeometry args={[0.55, 0.055, 8, 32]} />
-        <meshBasicMaterial color="#00E5FF" transparent opacity={0.35} />
-      </mesh>
+      
 
       <pointLight color="#00E5FF" intensity={isMobile ? 10 : 8} distance={14} decay={2} />
 
+      {/* 4 oral arms — thinner than before */}
       {Array.from({ length: 4 }, (_, i) => <OralArm key={i} index={i} />)}
 
-      {!isMobile && Array.from({ length: 10 }, (_, i) => (
-        <Tentacle key={i} index={i} count={10} length={8} color="#1BFFD3" speed={0.9} radius={0.012} />
-      ))}
-
-      {!isMobile && Array.from({ length: 6 }, (_, i) => (
-        <Tentacle key={`m${i}`} index={i} count={6} length={5} color="#7B2FFF" speed={1.1} radius={0.018} />
+      {/* 8 long tentacles only — remove the medium ones */}
+      {!isMobile && Array.from({ length: 8 }, (_, i) => (
+        <Tentacle key={i} index={i} count={8} length={8} color="#1BFFD3" speed={0.8} radius={0.01} />
       ))}
 
     </group>

@@ -5,11 +5,11 @@ import { useIsMobile } from '../hooks/useIsMobile'
 
 const SECTIONS = [
   { name: 'About',         pos: 0.09 },
-  { name: 'XR',            pos: 0.20 },
-  { name: 'Installations', pos: 0.40 },
-  { name: 'UI / UX',       pos: 0.55 },
-  { name: 'Art',           pos: 0.65 },
-  { name: 'Contact',       pos: 0.90 },
+  { name: 'XR',            pos: 0.22 },
+  { name: 'Installations', pos: 0.42 },
+  { name: 'UI / UX',       pos: 0.57 },
+  { name: 'Art',           pos: 0.67 },
+  { name: 'Contact',       pos: 0.92 },
 ]
 const MOBILE_SECTIONS = [
   { name: 'About',   pos: 0.09 },
