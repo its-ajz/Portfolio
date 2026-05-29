@@ -11,6 +11,45 @@ export default function AboutSection({ scrollT }: { scrollT: number }) {
 
   if (opacity <= 0) return null
 
+if (isMobile) {
+  return (
+    <div style={{
+      position: 'fixed',
+      bottom: 0, left: 0, right: 0,
+      zIndex: 150, opacity,
+      background: 'rgba(2,8,24,0.92)',
+      backdropFilter: 'blur(16px)',
+      borderTop: '1px solid rgba(0,229,255,0.08)',
+      borderRadius: '16px 16px 0 0',
+      padding: '14px 20px 32px',
+    }}>
+      <div style={{
+        width: '32px', height: '3px', borderRadius: '2px',
+        background: 'rgba(255,255,255,0.15)',
+        margin: '0 auto 16px',
+      }} />
+      <div style={{ display: 'flex', gap: '12px', alignItems: 'center', marginBottom: '12px' }}>
+        <img
+          src="https://i.imgur.com/UbSen9R.jpeg"
+          alt="Anjali Zalani"
+          style={{ width: '48px', height: '48px', borderRadius: '50%', objectFit: 'cover', border: '1.5px solid rgba(0,229,255,0.3)', flexShrink: 0 }}
+        />
+        <div>
+          <div style={{ fontSize: '18px', fontWeight: 300, color: 'white', fontFamily: 'var(--font-dm-sans)' }}>
+            Anjali Zalani
+          </div>
+          <div style={{ fontSize: '10px', color: '#00E5FF', letterSpacing: '0.1em', textTransform: 'uppercase', fontFamily: 'var(--font-dm-sans)' }}>
+            Immersive Experience Designer
+          </div>
+        </div>
+      </div>
+      <p style={{ fontSize: '12px', color: 'rgba(255,255,255,0.55)', lineHeight: 1.6, fontFamily: 'var(--font-dm-sans)' }}>
+        I design experiences you can step inside — from Apple Vision Pro spatial systems to large-scale physical installations.
+      </p>
+    </div>
+  )
+}
+
   return (
     <div style={{
         position: 'fixed',

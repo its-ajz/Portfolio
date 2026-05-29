@@ -142,24 +142,13 @@ export default function Jellyfish() {
   const isMobile = useIsMobile()
 
   useFrame((state) => {
-  if (!groupRef.current || !bellRef.current) return
+  if (!bellRef.current || !groupRef.current) return
   const t = state.clock.elapsedTime
-
-  // Bell pulse — propulsion squish
   const pulse = Math.sin(t * 1.2) * 0.1
   bellRef.current.scale.y = 1 + pulse
   bellRef.current.scale.x = 1 - pulse * 0.5
   bellRef.current.scale.z = 1 - pulse * 0.5
-
-  // Organic drift — tilts and sways like it's floating in current
-  groupRef.current.position.y = Math.sin(t * 0.5) * 0.25
-  groupRef.current.position.x = Math.sin(t * 0.35) * 0.18
-
-  // Gentle lean side to side
-  groupRef.current.rotation.z = Math.sin(t * 0.4)  * 0.12
-
-  // Subtle forward/back lean
-  groupRef.current.rotation.x = Math.sin(t * 0.28 + 1) * 0.08
+  groupRef.current.position.y = Math.sin(t * 0.5) * 0.2
 })
 
   return (

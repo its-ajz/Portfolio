@@ -53,20 +53,16 @@ export default function ScrollManager({
     jellyfishPos.current.copy(jellyPos)
 
     if (jellyRef.current) {
-      jellyRef.current.position.lerp(jellyPos, 0.1)
-
-      // Face direction of travel
-      const nextPos = PATH.getPoint(Math.min(0.999, tJ + 0.015))
-      const dir = nextPos.clone().sub(jellyPos).normalize()
-      if (dir.length() > 0.001) {
-        const targetQuat = new THREE.Quaternion()
-        const up = new THREE.Vector3(0, 1, 0)
-        const mat = new THREE.Matrix4().lookAt(jellyPos, nextPos, up)
-        targetQuat.setFromRotationMatrix(mat)
-        jellyRef.current.quaternion.slerp(targetQuat, 0.04)
-      }
-    }
-  })
+    jellyRef.current.position.lerp(jellyPos, 0.1)
+    const nextJellyPos = PATH.getPoint(Math.min(0.999, tJ + 0.008))
+    const vel   = nextJellyPos.clone().sub(jellyPos)
+    const speed = vel.length()
+    const targetX = speed > 0.0005 ? (vel.z / speed) * 0.28 : 0
+    const targetZ = speed > 0.0005 ? -(vel.x / speed) * 0.28 : 0
+    jellyRef.current.rotation.x = THREE.MathUtils.lerp(jellyRef.current.rotation.x, targetX, 0.04)
+    jellyRef.current.rotation.z = THREE.MathUtils.lerp(jellyRef.current.rotation.z, targetZ, 0.04)
+  }
+})
 
   return (
     <group ref={jellyRef}>
