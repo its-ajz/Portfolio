@@ -12,6 +12,8 @@ import CustomCursor from './components/CustomCursor'
 import { ProjectData } from './data/project'
 import { scrollState } from './utils/ScrollState'
 import WorkSidebar from './components/WorkSidebar'
+import ZoneIndicator from './components/ZoneIndicator'
+
 
 
 
@@ -62,6 +64,8 @@ export default function Home() {
           <AboutSection scrollT={scrollT} />
           <WorkSidebar scrollT={scrollT} />
           <ContactSection scrollT={scrollT} />
+
+          <ZoneIndicator scrollT={scrollT} />
         </>
       )}
 

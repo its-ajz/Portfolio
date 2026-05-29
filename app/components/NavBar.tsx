@@ -4,9 +4,17 @@ import { useEffect, useState } from 'react'
 import { useIsMobile } from '../hooks/useIsMobile'
 
 const SECTIONS = [
+  { name: 'About',         pos: 0.09 },
+  { name: 'XR',            pos: 0.20 },
+  { name: 'Installations', pos: 0.40 },
+  { name: 'UI / UX',       pos: 0.55 },
+  { name: 'Art',           pos: 0.65 },
+  { name: 'Contact',       pos: 0.90 },
+]
+const MOBILE_SECTIONS = [
   { name: 'About',   pos: 0.09 },
   { name: 'Work',    pos: 0.20 },
-  { name: 'Art',     pos: 0.63 },
+  { name: 'Art',     pos: 0.65 },
   { name: 'Contact', pos: 0.90 },
 ]
 

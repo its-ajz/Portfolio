@@ -26,6 +26,21 @@ export default function AboutSection({ scrollT }: { scrollT: number }) {
         borderRadius: '16px',                  // ← add this
         border: '1px solid rgba(255,255,255,0.05)',  // ← add this
     }}>
+        <div style={{
+        width: isMobile ? '72px' : '88px',
+        height: isMobile ? '72px' : '88px',
+        borderRadius: '50%',
+        overflow: 'hidden',
+        marginBottom: '20px',
+        border: '2px solid rgba(0,229,255,0.3)',
+      }}>
+        <img
+          src="https://i.imgur.com/UbSen9R.jpeg"
+          alt="Anjali Zalani"
+          style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+        />
+      </div>
+
       <p style={{
         fontSize: isMobile ? '10px' : '11px',
         color: '#00E5FF',

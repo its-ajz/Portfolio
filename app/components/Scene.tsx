@@ -8,8 +8,6 @@ import { ACESFilmicToneMapping } from 'three'
 import * as THREE from 'three'
 import { useIsMobile } from '../hooks/useIsMobile'
 import OceanParticles from './OceanParticles'
-import Constellations from './Constellations'
-import ZoneLabels from './ZoneLabels'
 import ScrollManager from './ScrollManager'
 import ProjectNodes from './ProjectNodes'
 
@@ -33,9 +31,6 @@ export default function Scene() {
       <ambientLight intensity={0.2} />
 
       <OceanParticles />
-
-      {!isMobile && <Constellations />}
-      {!isMobile && <ZoneLabels />}
 
       <ScrollManager jellyfishPos={jellyfishPos} />
       <ProjectNodes jellyfishPos={jellyfishPos} />
