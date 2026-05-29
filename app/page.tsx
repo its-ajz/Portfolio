@@ -10,6 +10,10 @@ import ContactSection from './components/ContactSection'
 import ProjectModal from './components/ProjectModal'
 import CustomCursor from './components/CustomCursor'
 import { ProjectData } from './data/project'
+import { scrollState } from './utils/ScrollState'
+
+// Inside the onScroll function:
+
 
 export default function Home() {
   const [started, setStarted] = useState(false)
@@ -19,7 +23,9 @@ export default function Home() {
   useEffect(() => {
     const onScroll = () => {
       const max = document.documentElement.scrollHeight - window.innerHeight
-      setScrollT(max > 0 ? window.scrollY / max : 0)
+      const t = max > 0 ? window.scrollY / max : 0
+      scrollState.t = t   // ← add this line
+      setScrollT(t)
     }
     window.addEventListener('scroll', onScroll, { passive: true })
     return () => window.removeEventListener('scroll', onScroll)

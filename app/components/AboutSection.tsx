@@ -13,13 +13,18 @@ export default function AboutSection({ scrollT }: { scrollT: number }) {
 
   return (
     <div style={{
-      position: 'fixed',
-      top: '50%', left: isMobile ? '20px' : '60px',
-      transform: 'translateY(-50%)',
-      zIndex: 150,
-      opacity,
-      transition: 'opacity 0.3s ease',
-      maxWidth: isMobile ? 'calc(100vw - 40px)' : '460px',
+        position: 'fixed',
+        top: '50%', left: isMobile ? '20px' : '60px',
+        transform: 'translateY(-50%)',
+        zIndex: 150,
+        opacity,
+        transition: 'opacity 0.3s ease',
+        maxWidth: isMobile ? 'calc(100vw - 40px)' : '460px',
+        background: 'rgba(2, 8, 24, 0.45)',   // ← add this
+        backdropFilter: 'blur(12px)',           // ← add this
+        padding: isMobile ? '24px' : '32px',   // ← add this
+        borderRadius: '16px',                  // ← add this
+        border: '1px solid rgba(255,255,255,0.05)',  // ← add this
     }}>
       <p style={{
         fontSize: isMobile ? '10px' : '11px',

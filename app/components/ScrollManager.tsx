@@ -40,7 +40,7 @@ export default function ScrollManager({
 
     const t  = Math.max(0, Math.min(0.999, smoothRef.current))
     const tL = Math.min(0.999, t + 0.035)
-    const tJ = Math.min(0.999, t + 0.055)
+    const tJ = Math.min(0.999, t + 0.015)
 
     // Camera
     const camPos    = PATH.getPoint(t)
