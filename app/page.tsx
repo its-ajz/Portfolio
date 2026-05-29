@@ -13,6 +13,7 @@ import { ProjectData } from './data/project'
 import { scrollState } from './utils/ScrollState'
 import WorkSidebar from './components/WorkSidebar'
 import ZoneIndicator from './components/ZoneIndicator'
+import ScrollProgress from './components/ScrollProgress'
 
 
 
@@ -69,6 +70,7 @@ export default function Home() {
           <AboutSection scrollT={scrollT} />
           <WorkSidebar scrollT={scrollT} />
           <ContactSection scrollT={scrollT} />
+          <ScrollProgress scrollT={scrollT} />
 
           <ZoneIndicator scrollT={scrollT} />
         </>

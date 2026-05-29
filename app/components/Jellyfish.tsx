@@ -7,67 +7,100 @@ import * as THREE from 'three'
 import { useIsMobile } from '../hooks/useIsMobile'
 
 function Tentacle({
-  index, count, length = 7, opacity = 0.5, color = '#1BFFD3', speed = 1,
+  index, count, length = 7, color = '#1BFFD3', speed = 1, radius = 0.012,
 }: {
   index: number; count: number; length?: number
-  opacity?: number; color?: string; speed?: number
+  color?: string; speed?: number; radius?: number
 }) {
-  const geoRef    = useRef<THREE.BufferGeometry>(null)
-  const SEGMENTS  = 40
-  const angle     = (index / count) * Math.PI * 2
-  const positions = useMemo(() => new Float32Array((SEGMENTS + 1) * 3), [])
+  const meshRef = useRef<THREE.Mesh>(null)
+  const angle   = (index / count) * Math.PI * 2
+  const SEGS    = 16
+  const points  = useMemo(
+    () => Array.from({ length: SEGS + 1 }, () => new THREE.Vector3()), []
+  )
 
   useFrame((state) => {
-    if (!geoRef.current) return
-    const t   = state.clock.elapsedTime * speed
-    const arr = geoRef.current.attributes.position.array as Float32Array
-    for (let i = 0; i <= SEGMENTS; i++) {
-      const p   = i / SEGMENTS
-      const amp = p * p * 2.2
-      arr[i * 3]     = Math.cos(angle) * 0.9 + Math.sin(t * 1.8 + p * 10 + index * 1.4) * amp
-      arr[i * 3 + 1] = -p * length
-      arr[i * 3 + 2] = Math.sin(angle) * 0.9 + Math.cos(t * 2.1 + p * 8  + index * 1.1) * amp * 0.9
+    if (!meshRef.current) return
+    const t = state.clock.elapsedTime * speed
+    for (let i = 0; i <= SEGS; i++) {
+      const p   = i / SEGS
+      const amp = p * p * 2.0
+      points[i].set(
+        Math.cos(angle) * 0.9 + Math.sin(t * 1.8 + p * 10 + index * 1.4) * amp,
+        -p * length,
+        Math.sin(angle) * 0.9 + Math.cos(t * 2.1 + p * 8  + index * 1.1) * amp * 0.9
+      )
     }
-    geoRef.current.attributes.position.needsUpdate = true
+    const newGeo = new THREE.TubeGeometry(new THREE.CatmullRomCurve3(points), SEGS, radius, 4, false)
+    if (meshRef.current.geometry) meshRef.current.geometry.dispose()
+    meshRef.current.geometry = newGeo
   })
 
   return (
-    <line>
-      <bufferGeometry ref={geoRef}>
-        <bufferAttribute attach="attributes-position" args={[positions, 3]} />
-      </bufferGeometry>
-      <lineBasicMaterial color={color} transparent opacity={opacity} />
-    </line>
+    <mesh ref={meshRef}>
+      <meshStandardMaterial
+        color={color} emissive={color} emissiveIntensity={0.4}
+        transparent opacity={0.75}
+      />
+    </mesh>
   )
 }
 
 function OralArm({ index }: { index: number }) {
+  const isMobile  = useIsMobile()
+  const meshRef   = useRef<THREE.Mesh>(null)
   const geoRef    = useRef<THREE.BufferGeometry>(null)
-  const SEGMENTS  = 30
   const angle     = (index / 4) * Math.PI * 2 + Math.PI / 4
-  const positions = useMemo(() => new Float32Array((SEGMENTS + 1) * 3), [])
+  const SEGS      = 14
+  const points    = useMemo(() => Array.from({ length: SEGS + 1 }, () => new THREE.Vector3()), [])
+  const positions = useMemo(() => new Float32Array((SEGS + 1) * 3), [])
 
   useFrame((state) => {
-    if (!geoRef.current) return
-    const t   = state.clock.elapsedTime
-    const arr = geoRef.current.attributes.position.array as Float32Array
-    for (let i = 0; i <= SEGMENTS; i++) {
-      const p   = i / SEGMENTS
-      const amp = p * 1.4
-      arr[i * 3]     = Math.cos(angle) * 0.3 + Math.sin(t * 1.0 + p * 5 + index * 2.1) * amp
-      arr[i * 3 + 1] = -0.2 - p * 2.8
-      arr[i * 3 + 2] = Math.sin(angle) * 0.3 + Math.cos(t * 1.3 + p * 4 + index * 1.6) * amp * 0.8
+    const t = state.clock.elapsedTime
+    for (let i = 0; i <= SEGS; i++) {
+      const p = i / SEGS, amp = p * 1.5
+      points[i].set(
+        Math.cos(angle) * 0.3 + Math.sin(t * 0.9 + p * 5 + index * 2.1) * amp,
+        -0.2 - p * 3.0,
+        Math.sin(angle) * 0.3 + Math.cos(t * 1.2 + p * 4 + index * 1.6) * amp * 0.8
+      )
     }
-    geoRef.current.attributes.position.needsUpdate = true
+
+    if (isMobile) {
+      if (!geoRef.current) return
+      const arr = geoRef.current.attributes.position.array as Float32Array
+      for (let i = 0; i <= SEGS; i++) {
+        arr[i * 3] = points[i].x
+        arr[i * 3 + 1] = points[i].y
+        arr[i * 3 + 2] = points[i].z
+      }
+      geoRef.current.attributes.position.needsUpdate = true
+    } else {
+      if (!meshRef.current) return
+      const newGeo = new THREE.TubeGeometry(new THREE.CatmullRomCurve3(points), SEGS, 0.055, 6, false)
+      if (meshRef.current.geometry) meshRef.current.geometry.dispose()
+      meshRef.current.geometry = newGeo
+    }
   })
 
+  if (isMobile) {
+    return (
+      <line>
+        <bufferGeometry ref={geoRef}>
+          <bufferAttribute attach="attributes-position" args={[positions, 3]} />
+        </bufferGeometry>
+        <lineBasicMaterial color="#9B5FFF" transparent opacity={0.7} />
+      </line>
+    )
+  }
+
   return (
-    <line>
-      <bufferGeometry ref={geoRef}>
-        <bufferAttribute attach="attributes-position" args={[positions, 3]} />
-      </bufferGeometry>
-      <lineBasicMaterial color="#7B2FFF" transparent opacity={0.6} />
-    </line>
+    <mesh ref={meshRef}>
+      <meshStandardMaterial
+        color="#9B5FFF" emissive="#4400AA" emissiveIntensity={0.5}
+        transparent opacity={0.65}
+      />
+    </mesh>
   )
 }
 
@@ -182,12 +215,12 @@ export default function Jellyfish() {
 
       {Array.from({ length: 4 }, (_, i) => <OralArm key={i} index={i} />)}
 
-      {Array.from({ length: 16 }, (_, i) => (
-        <Tentacle key={i} index={i} count={16} length={7} opacity={0.5} speed={0.9} />
+      {!isMobile && Array.from({ length: 10 }, (_, i) => (
+        <Tentacle key={i} index={i} count={10} length={8} color="#1BFFD3" speed={0.9} radius={0.012} />
       ))}
 
-      {Array.from({ length: 8 }, (_, i) => (
-        <Tentacle key={`m${i}`} index={i} count={8} length={4} opacity={0.35} color="#7B2FFF" speed={1.1} />
+      {!isMobile && Array.from({ length: 6 }, (_, i) => (
+        <Tentacle key={`m${i}`} index={i} count={6} length={5} color="#7B2FFF" speed={1.1} radius={0.018} />
       ))}
 
     </group>
