@@ -11,8 +11,8 @@ import ProjectModal from './components/ProjectModal'
 import CustomCursor from './components/CustomCursor'
 import { ProjectData } from './data/project'
 import { scrollState } from './utils/ScrollState'
+import WorkSidebar from './components/WorkSidebar'
 
-// Inside the onScroll function:
 
 
 export default function Home() {
@@ -60,6 +60,7 @@ export default function Home() {
           <NavBar scrollT={scrollT} />
           <ScrollHint />
           <AboutSection scrollT={scrollT} />
+          <WorkSidebar scrollT={scrollT} />
           <ContactSection scrollT={scrollT} />
         </>
       )}

@@ -52,18 +52,18 @@ export default function ProjectModal({
     position: 'relative',
   }
 
-  const closeBtnStyle: React.CSSProperties = {
+    const closeBtnStyle: React.CSSProperties = {
     position: 'absolute',
-    top: '16px',
-    right: '16px',
-    background: 'rgba(255,255,255,0.06)',
-    border: 'none',
+    top: '12px',
+    left: '12px',   // ← was right: '16px'
+    background: 'rgba(0,0,0,0.5)',
+    border: '1px solid rgba(255,255,255,0.15)',
     color: 'white',
-    width: '32px',
-    height: '32px',
+    width: '28px',
+    height: '28px',
     borderRadius: '50%',
     cursor: 'pointer',
-    fontSize: '18px',
+    fontSize: '14px',
     zIndex: 10,
     display: 'flex',
     alignItems: 'center',
