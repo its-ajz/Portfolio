@@ -23,6 +23,11 @@ export default function Home() {
   const [scrollT, setScrollT] = useState(0)
 
   useEffect(() => {
+    window.history.scrollRestoration = 'manual'
+    window.scrollTo(0, 0)
+  }, [])
+  useEffect(() => {
+    
     const onScroll = () => {
       const max = document.documentElement.scrollHeight - window.innerHeight
       const t = max > 0 ? window.scrollY / max : 0
