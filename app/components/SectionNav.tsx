@@ -77,4 +77,4 @@ export default function SectionNav({ scrollT }: { scrollT: number }) {
       })}
     </div>
   )
-}'use client'
+}
