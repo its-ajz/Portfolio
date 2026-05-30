@@ -9,30 +9,29 @@ import AboutSection from './components/AboutSection'
 import ContactSection from './components/ContactSection'
 import ProjectModal from './components/ProjectModal'
 import CustomCursor from './components/CustomCursor'
-import { ProjectData } from './data/project'
-import { scrollState } from './utils/ScrollState'
 import WorkSidebar from './components/WorkSidebar'
 import ZoneIndicator from './components/ZoneIndicator'
-import ScrollProgress from './components/ScrollProgress'
-
-
-
+import OnboardingHint from './components/OnboardingHint'
+import SectionNav from './components/SectionNav'
+import { ProjectData } from './data/project'
+import { scrollState } from './utils/ScrollState'
 
 export default function Home() {
-  const [started, setStarted] = useState(false)
+  const [started,       setStarted]       = useState(false)
   const [activeProject, setActiveProject] = useState<ProjectData | null>(null)
-  const [scrollT, setScrollT] = useState(0)
+  const [scrollT,       setScrollT]       = useState(0)
+  const [showOnboarding, setShowOnboarding] = useState(false)
 
   useEffect(() => {
     window.history.scrollRestoration = 'manual'
     window.scrollTo(0, 0)
   }, [])
+
   useEffect(() => {
-    
     const onScroll = () => {
       const max = document.documentElement.scrollHeight - window.innerHeight
-      const t = max > 0 ? window.scrollY / max : 0
-      scrollState.t = t   // ← add this line
+      const t   = max > 0 ? window.scrollY / max : 0
+      scrollState.t = t
       setScrollT(t)
     }
     window.addEventListener('scroll', onScroll, { passive: true })
@@ -59,24 +58,29 @@ export default function Home() {
 
       <CustomCursor />
 
-      {/* Intro — shown before started */}
-      {!started && <IntroScreen onEnter={() => setStarted(true)} />}
+      {!started && (
+        <IntroScreen onEnter={() => {
+          setStarted(true)
+          setShowOnboarding(true)
+        }} />
+      )}
 
-      {/* Everything below only after entering */}
       {started && (
         <>
           <NavBar scrollT={scrollT} />
           <ScrollHint />
+          <SectionNav scrollT={scrollT} />
+          <ZoneIndicator scrollT={scrollT} />
           <AboutSection scrollT={scrollT} />
           <WorkSidebar scrollT={scrollT} />
           <ContactSection scrollT={scrollT} />
-          <ScrollProgress scrollT={scrollT} />
-
-          <ZoneIndicator scrollT={scrollT} />
         </>
       )}
 
-      {/* Project modal */}
+      {showOnboarding && (
+        <OnboardingHint onDismiss={() => setShowOnboarding(false)} />
+      )}
+
       {activeProject && (
         <ProjectModal
           project={activeProject}

@@ -1,9 +1,11 @@
 'use client'
 
 import { useEffect, useState } from 'react'
+import { useIsMobile } from '../hooks/useIsMobile'
 
 export default function IntroScreen({ onEnter }: { onEnter: () => void }) {
   const [phase, setPhase] = useState<'hidden' | 'visible' | 'leaving'>('hidden')
+  const isMobile = useIsMobile()
 
   useEffect(() => {
     const t = setTimeout(() => setPhase('visible'), 400)
@@ -20,38 +22,32 @@ export default function IntroScreen({ onEnter }: { onEnter: () => void }) {
     <div
       onClick={enter}
       style={{
-        position: 'fixed',
-        inset: 0,
+        position: 'fixed', inset: 0,
         background: '#020818',
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-        justifyContent: 'center',
+        display: 'flex', flexDirection: 'column',
+        alignItems: 'center', justifyContent: 'center',
         zIndex: 1000,
         cursor: phase === 'visible' ? 'pointer' : 'default',
         opacity: phase === 'leaving' ? 0 : 1,
         transition: 'opacity 1.2s ease',
         userSelect: 'none',
+        padding: '24px',
       }}
     >
-      {/* Top line */}
       <div style={{
-        width: '40px',
-        height: '1px',
+        width: '40px', height: '1px',
         background: 'rgba(0,229,255,0.4)',
         marginBottom: '32px',
         opacity: phase === 'visible' ? 1 : 0,
         transition: 'opacity 1s ease',
       }} />
 
-      {/* Name */}
       <div style={{
         fontSize: 'clamp(28px, 5.5vw, 68px)',
-        fontWeight: 300,
-        color: 'white',
-        letterSpacing: '0.2em',
-        textTransform: 'uppercase',
-        fontFamily: 'system-ui, -apple-system, sans-serif',
+        fontWeight: 300, color: 'white',
+        letterSpacing: '0.2em', textTransform: 'uppercase',
+        fontFamily: 'var(--font-dm-sans)',
+        textAlign: 'center',
         opacity: phase === 'visible' ? 1 : 0,
         transform: phase === 'visible' ? 'translateY(0)' : 'translateY(16px)',
         transition: 'opacity 1s ease 0.1s, transform 1s ease 0.1s',
@@ -59,49 +55,58 @@ export default function IntroScreen({ onEnter }: { onEnter: () => void }) {
         Anjali Zalani
       </div>
 
-      {/* Bottom line */}
       <div style={{
-        width: '40px',
-        height: '1px',
+        width: '40px', height: '1px',
         background: 'rgba(0,229,255,0.4)',
         margin: '24px 0',
         opacity: phase === 'visible' ? 1 : 0,
         transition: 'opacity 1s ease 0.3s',
       }} />
 
-      {/* Tagline */}
       <div style={{
         fontSize: 'clamp(10px, 1.2vw, 13px)',
         color: '#00E5FF',
-        letterSpacing: '0.35em',
-        textTransform: 'uppercase',
-        fontFamily: 'system-ui, -apple-system, sans-serif',
+        letterSpacing: '0.35em', textTransform: 'uppercase',
+        fontFamily: 'var(--font-dm-sans)',
+        textAlign: 'center',
         opacity: phase === 'visible' ? 0.7 : 0,
         transition: 'opacity 1.2s ease 0.4s',
       }}>
         XR · Installation · Interaction Design
       </div>
 
-      {/* Enter prompt */}
       <div style={{
-        position: 'absolute',
-        bottom: '44px',
-        fontSize: '10px',
-        color: 'rgba(255,255,255,0.25)',
-        letterSpacing: '0.25em',
-        textTransform: 'uppercase',
-        fontFamily: 'system-ui, -apple-system, sans-serif',
+        position: 'absolute', bottom: '44px',
+        display: 'flex', flexDirection: 'column',
+        alignItems: 'center', gap: '10px',
         opacity: phase === 'visible' ? 1 : 0,
         transition: 'opacity 1.5s ease 0.8s',
-        animation: phase === 'visible' ? 'breathe 2.5s ease-in-out infinite' : 'none',
       }}>
-        Explore
+        <p style={{
+          fontSize: isMobile ? '11px' : '12px',
+          color: 'rgba(255,255,255,0.3)',
+          letterSpacing: '0.15em', textTransform: 'uppercase',
+          fontFamily: 'var(--font-dm-sans)',
+          textAlign: 'center',
+        }}>
+          {isMobile ? 'Swipe up to explore' : 'Scroll down to explore'}
+        </p>
+
+        <p style={{
+          fontSize: '10px',
+          color: 'rgba(255,255,255,0.2)',
+          letterSpacing: '0.25em', textTransform: 'uppercase',
+          fontFamily: 'var(--font-dm-sans)',
+          animation: phase === 'visible' ? 'breathe 2.5s ease-in-out infinite' : 'none',
+        }}>
+          Click to enter
+        </p>
       </div>
 
       <style>{`
         @keyframes breathe {
-          0%, 100% { opacity: 0.25; }
-          50% { opacity: 0.6; }
+          0%, 100% { opacity: 0.2; }
+          50%       { opacity: 0.55; }
         }
       `}</style>
     </div>

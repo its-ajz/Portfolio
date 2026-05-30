@@ -30,7 +30,7 @@ export default function Scene() {
       <color attach="background" args={['#020818']} />
       <fog attach="fog" args={['#020818', 20, 90]} />
       <ambientLight intensity={0.2} />
-      <Environment preset="dawn" />
+      <Environment preset="night" />
 
       <OceanParticles />
 
