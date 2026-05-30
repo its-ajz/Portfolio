@@ -148,10 +148,10 @@ export default function WorkSidebar({ scrollT }: { scrollT: number }) {
               style={{ width: '56px', height: '44px', objectFit: 'cover', borderRadius: '5px', flexShrink: 0 }}
             />
             <div>
-              <div style={{ fontSize: '12px', fontWeight: 500, color: pc, marginBottom: '3px', fontFamily: 'var(--font-dm-sans)' }}>
+              <div style={{ fontSize: '13px', fontWeight: 500, color: pc, marginBottom: '3px', fontFamily: 'var(--font-dm-sans)' }}>
                 {project.title}
               </div>
-              <div style={{ fontSize: '10px', color: 'rgba(255,255,255,0.45)', lineHeight: 1.4, fontFamily: 'var(--font-dm-sans)' }}>
+              <div style={{ fontSize: '11px', color: 'rgba(255,255,255,0.45)', lineHeight: 1.4, fontFamily: 'var(--font-dm-sans)' }}>
                 {project.shortDesc}
               </div>
             </div>

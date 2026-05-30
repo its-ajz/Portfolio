@@ -136,9 +136,9 @@ if (isMobile) {
         color: 'rgba(255,255,255,0.45)',
         lineHeight: 1.75,
         fontFamily: 'var(--font-dm-sans)',
-      }}>
-        Student at USC's Iovine and Young Academy. Currently exploring immersive VR worlds, spatial design, and interactive storytelling.
-      </p>
+        }}>
+        Student at USC's Iovine and Young Academy. Currently exploring immersive VR worlds, spatial design, and interactive storytelling. Open to internships and collaborations in XR and experience design.
+        </p>
     </div>
   )
 }

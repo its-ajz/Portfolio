@@ -4,8 +4,8 @@ import { useIsMobile } from '../hooks/useIsMobile'
 
 const LINKS = [
   { label: 'Email', value: 'anjali.zalani@icloud.com', href: 'mailto:anjali.zalani@icloud.com' },
-  { label: 'LinkedIn', value: 'linkedin.com/in/yourname', href: 'https://www.linkedin.com/in/anjali-zalani/' },
-  { label: 'GitHub', value: 'github.com/yourname', href: 'https://github.com/its-ajz' },
+  { label: 'LinkedIn', value: 'linkedin.com/in/anjali-zalani/', href: 'https://www.linkedin.com/in/anjali-zalani/' },
+  { label: 'GitHub', value: 'github.com/its-ajz', href: 'https://github.com/its-ajz' },
 ]
 
 export default function ContactSection({ scrollT }: { scrollT: number }) {

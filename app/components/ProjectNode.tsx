@@ -19,10 +19,13 @@ export default function ProjectNode({
   const nodePos  = useRef(new THREE.Vector3(...data.position)).current
   const color    = ZONE_COLORS[data.category]
 
-  useFrame(() => {
+  useFrame((state) => {
     if (!meshRef.current) return
     meshRef.current.rotation.y += 0.006
     meshRef.current.rotation.x += 0.003
+    meshRef.current.scale.setScalar(
+  1 + Math.sin(state.clock.elapsedTime * 1.5 + data.position[0]) * 0.08
+)
 
     const nearness = Math.max(0, 1 - jellyfishPos.current.distanceTo(nodePos) / PROXIMITY)
     const mat      = meshRef.current.material as THREE.MeshStandardMaterial

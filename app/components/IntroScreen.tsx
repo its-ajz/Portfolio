@@ -95,7 +95,7 @@ export default function IntroScreen({ onEnter }: { onEnter: () => void }) {
         transition: 'opacity 1.5s ease 0.8s',
         animation: phase === 'visible' ? 'breathe 2.5s ease-in-out infinite' : 'none',
       }}>
-        Click anywhere to explore
+        Explore
       </div>
 
       <style>{`
