@@ -93,8 +93,8 @@ export default function IntroScreen({ onEnter }: { onEnter: () => void }) {
         </p>
 
         <p style={{
-          fontSize: '10px',
-          color: 'rgba(255,255,255,0.2)',
+          fontSize: '12px',
+          color: 'rgba(255, 255, 255, 0.2)',
           letterSpacing: '0.25em', textTransform: 'uppercase',
           fontFamily: 'var(--font-dm-sans)',
           animation: phase === 'visible' ? 'breathe 2.5s ease-in-out infinite' : 'none',
