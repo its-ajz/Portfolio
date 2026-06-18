@@ -83,23 +83,13 @@ export default function IntroScreen({ onEnter }: { onEnter: () => void }) {
         transition: 'opacity 1.5s ease 0.8s',
       }}>
         <p style={{
-          fontSize: isMobile ? '11px' : '12px',
+          fontSize: isMobile ? '13px' : '15px',
           color: 'rgba(255,255,255,0.3)',
           letterSpacing: '0.15em', textTransform: 'uppercase',
           fontFamily: 'var(--font-dm-sans)',
           textAlign: 'center',
         }}>
           {isMobile ? 'Swipe up to explore' : 'Click to enter'}
-        </p>
-
-        <p style={{
-          fontSize: '12px',
-          color: 'rgba(255, 255, 255, 0.2)',
-          letterSpacing: '0.25em', textTransform: 'uppercase',
-          fontFamily: 'var(--font-dm-sans)',
-          animation: phase === 'visible' ? 'breathe 2.5s ease-in-out infinite' : 'none',
-        }}>
-          Click to enter
         </p>
       </div>
 
