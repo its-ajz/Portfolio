@@ -89,7 +89,7 @@ export default function IntroScreen({ onEnter }: { onEnter: () => void }) {
           fontFamily: 'var(--font-dm-sans)',
           textAlign: 'center',
         }}>
-          {isMobile ? 'Swipe up to explore' : 'Scroll down to explore'}
+          {isMobile ? 'Swipe up to explore' : 'Click to enter'}
         </p>
 
         <p style={{
