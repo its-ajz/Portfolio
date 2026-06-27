@@ -39,8 +39,9 @@ function Tentacle({
   return (
     <mesh ref={meshRef}>
       <meshStandardMaterial
-        color={color} emissive={color} emissiveIntensity={0.4}
-        transparent opacity={0.75}
+        color={color} emissive={color} emissiveIntensity={0.6}
+        transparent opacity={0.8}
+        emissiveMap={null}
       />
     </mesh>
   )
@@ -97,8 +98,8 @@ function OralArm({ index }: { index: number }) {
   return (
     <mesh ref={meshRef}>
       <meshStandardMaterial
-        color="#9B5FFF" emissive="#4400AA" emissiveIntensity={0.5}
-        transparent opacity={0.65}
+        color="#BB77FF" emissive="#BB77FF" emissiveIntensity={0.5}
+        transparent opacity={0.75}
       />
     </mesh>
   )
@@ -129,10 +130,93 @@ function BellVeins() {
           <bufferGeometry>
             <bufferAttribute attach="attributes-position" args={[arr, 3]} />
           </bufferGeometry>
-          <lineBasicMaterial color="#00E5FF" transparent opacity={0.1} />
+          <lineBasicMaterial color="#00FFDD" transparent opacity={0.15} linewidth={1} />
         </line>
       ))}
     </>
+  )
+}
+
+function AnimatedGlowRing() {
+  const meshRef = useRef<THREE.Mesh>(null)
+
+  useFrame((state) => {
+    if (!meshRef.current) return
+    const t = state.clock.elapsedTime
+    // Subtle rotation + pulsing glow
+    meshRef.current.rotation.z = t * 0.3
+    const glowPulse = 0.5 + Math.sin(t * 2) * 0.5
+    if (meshRef.current.material instanceof THREE.Material) {
+      meshRef.current.material.opacity = 0.4 + glowPulse * 0.3
+    }
+  })
+
+  return (
+    <mesh ref={meshRef} position={[0, -0.2, 0]}>
+      <torusGeometry args={[1.18, 0.04, 16, 100]} />
+      <meshBasicMaterial color="#00E5FF" transparent />
+    </mesh>
+  )
+}
+
+function InnerGlowParticles() {
+  const groupRef = useRef<THREE.Group>(null)
+  const particles = useMemo(() => {
+    const positions = new Float32Array(30 * 3) // 30 particles
+    for (let i = 0; i < 30; i++) {
+      positions[i * 3] = (Math.random() - 0.5) * 0.6
+      positions[i * 3 + 1] = (Math.random() - 0.5) * 0.6 + 0.2
+      positions[i * 3 + 2] = (Math.random() - 0.5) * 0.6
+    }
+    return positions
+  }, [])
+
+  useFrame((state) => {
+    if (!groupRef.current) return
+    const t = state.clock.elapsedTime
+    groupRef.current.rotation.x += 0.0008
+    groupRef.current.rotation.y += 0.001
+  })
+
+  return (
+    <group ref={groupRef}>
+      <points>
+        <bufferGeometry>
+          <bufferAttribute attach="attributes-position" args={[particles, 3]} />
+        </bufferGeometry>
+        <pointsMaterial
+          color="#1BFFD3"
+          size={0.04}
+          sizeAttenuation={true}
+          transparent
+          opacity={0.7}
+        />
+      </points>
+    </group>
+  )
+}
+
+function LuminousEdge() {
+  const meshRef = useRef<THREE.Mesh>(null)
+
+  useFrame((state) => {
+    if (!meshRef.current) return
+    const t = state.clock.elapsedTime
+    // Subtle breathing effect
+    const scale = 1 + Math.sin(t * 1.5) * 0.08
+    meshRef.current.scale.set(scale, scale, scale)
+  })
+
+  return (
+    <mesh ref={meshRef} position={[0, 0, 0]}>
+      <sphereGeometry args={[1.3, 32, 32, 0, Math.PI * 2, 0, Math.PI * 0.58]} />
+      <meshBasicMaterial
+        color="#00FFDD"
+        transparent
+        opacity={0.08}
+        side={THREE.BackSide}
+      />
+    </mesh>
   )
 }
 
@@ -142,42 +226,64 @@ export default function Jellyfish() {
   const isMobile = useIsMobile()
 
   useFrame((state) => {
-  if (!bellRef.current || !groupRef.current) return
-  const t = state.clock.elapsedTime
-  const pulse = Math.sin(t * 1.2) * 0.1
-  bellRef.current.scale.y = 1 + pulse
-  bellRef.current.scale.x = 1 - pulse * 0.5
-  bellRef.current.scale.z = 1 - pulse * 0.5
-  groupRef.current.position.y = Math.sin(t * 0.5) * 0.2
-})
+    if (!bellRef.current || !groupRef.current) return
+    const t = state.clock.elapsedTime
+    
+    // More dramatic pulse — draws attention
+    const pulse = Math.sin(t * 1.2) * 0.15
+    bellRef.current.scale.y = 1 + pulse
+    bellRef.current.scale.x = 1 - pulse * 0.4
+    bellRef.current.scale.z = 1 - pulse * 0.4
+    
+    // Floating motion
+    groupRef.current.position.y = Math.sin(t * 0.5) * 0.3 + Math.sin(t * 0.3) * 0.1
+  })
 
   return (
     <group ref={groupRef}>
+      {/* Luminous outer aura */}
+      <LuminousEdge />
 
-      {/* Outer bell */}
+      {/* Outer bell — main visual */}
       <mesh ref={bellRef}>
         <sphereGeometry args={[1.2, 64, 64, 0, Math.PI * 2, 0, Math.PI * 0.58]} />
         {isMobile ? (
           <meshPhysicalMaterial
-            color="#00CCDD" emissive="#00AACC" emissiveIntensity={0.8}
-            transparent opacity={0.4} roughness={0} side={THREE.DoubleSide}
+            color="#00DDFF" 
+            emissive="#0099CC" 
+            emissiveIntensity={1.0}
+            transparent 
+            opacity={0.5} 
+            roughness={0.1} 
+            side={THREE.DoubleSide}
           />
         ) : (
           <MeshTransmissionMaterial
-            backside samples={3} thickness={0.4}
-            roughness={0.05} transmission={0.92} ior={1.4}
-            chromaticAberration={0.04}
-            color="#88EEFF" emissive="#006688" emissiveIntensity={0.5}
+            backside
+            samples={4}
+            thickness={0.5}
+            roughness={0.08}
+            transmission={0.95}
+            ior={1.45}
+            chromaticAberration={0.08}
+            color="#00FFEE"
+            emissive="#00DDFF"
+            emissiveIntensity={0.7}
           />
         )}
       </mesh>
 
-      {/* Inner bell — depth layer */}
+      {/* Inner bell — depth layer with stronger glow */}
       <mesh scale={[0.82, 0.78, 0.82]}>
         <sphereGeometry args={[1.2, 32, 32, 0, Math.PI * 2, 0, Math.PI * 0.55]} />
         <meshPhysicalMaterial
-          color="#00AADD" emissive="#002244" emissiveIntensity={0.8}
-          transparent opacity={0.18} roughness={0} side={THREE.DoubleSide}
+          color="#0099DD"
+          emissive="#0088BB"
+          emissiveIntensity={1.0}
+          transparent
+          opacity={0.25}
+          roughness={0.05}
+          side={THREE.DoubleSide}
         />
       </mesh>
 
@@ -185,38 +291,56 @@ export default function Jellyfish() {
       <mesh position={[0, -0.18, 0]} rotation={[Math.PI, 0, 0]}>
         <cylinderGeometry args={[0.65, 1.15, 0.18, 32, 1, true]} />
         <meshPhysicalMaterial
-          color="#00CCEE" emissive="#004466" emissiveIntensity={1.0}
-          transparent opacity={0.3} roughness={0} side={THREE.DoubleSide}
+          color="#00EEFF"
+          emissive="#0099DD"
+          emissiveIntensity={1.2}
+          transparent
+          opacity={0.4}
+          roughness={0.08}
+          side={THREE.DoubleSide}
         />
       </mesh>
 
-      {/* Rim ring */}
-      <mesh position={[0, -0.2, 0]}>
-        <torusGeometry args={[1.16, 0.03, 8, 80]} />
-        <meshBasicMaterial color="#00E5FF" transparent opacity={0.7} />
-      </mesh>
+      {/* Animated rim ring */}
+      <AnimatedGlowRing />
 
       {/* Radial veins */}
       <BellVeins />
 
-      {/* Inner glow core */}
+      {/* Inner glow core with particles */}
+      <InnerGlowParticles />
+
+      {/* Inner bright core */}
       <mesh position={[0, 0.2, 0]}>
         <sphereGeometry args={[0.32, 16, 16]} />
-        <meshBasicMaterial color="#1BFFD3" transparent opacity={0.85} />
+        <meshBasicMaterial color="#00FFDD" transparent opacity={0.95} />
       </mesh>
 
-      
+      {/* Main light — stronger glow */}
+      <pointLight 
+        color="#00E5FF" 
+        intensity={isMobile ? 12 : 10} 
+        distance={16} 
+        decay={2} 
+      />
 
-      <pointLight color="#00E5FF" intensity={isMobile ? 10 : 8} distance={14} decay={2} />
+      {/* Secondary accent light */}
+      <pointLight
+        color="#00DDFF"
+        intensity={isMobile ? 6 : 4}
+        distance={10}
+        decay={2.5}
+        position={[0, -0.5, 0]}
+      />
 
-      {/* 4 oral arms — thinner than before */}
+      {/* 4 oral arms — thinner, glowy */}
       {Array.from({ length: 4 }, (_, i) => <OralArm key={i} index={i} />)}
 
-      {/* 8 long tentacles only — remove the medium ones */}
+      {/* 8 long tentacles — crisp and bright */}
       {!isMobile && Array.from({ length: 8 }, (_, i) => (
         <Tentacle key={i} index={i} count={8} length={8} color="#1BFFD3" speed={0.8} radius={0.01} />
       ))}
-
     </group>
   )
 }
+
