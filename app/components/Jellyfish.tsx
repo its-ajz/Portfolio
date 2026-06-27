@@ -302,7 +302,7 @@ export default function Jellyfish() {
       </mesh>
 
       {/* Animated rim ring */}
-      <AnimatedGlowRing />
+      
 
       {/* Radial veins */}
       <BellVeins />
