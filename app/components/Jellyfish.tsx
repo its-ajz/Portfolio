@@ -137,28 +137,6 @@ function BellVeins() {
   )
 }
 
-function AnimatedGlowRing() {
-  const meshRef = useRef<THREE.Mesh>(null)
-
-  useFrame((state) => {
-    if (!meshRef.current) return
-    const t = state.clock.elapsedTime
-    // Subtle rotation + pulsing glow
-    meshRef.current.rotation.z = t * 0.3
-    const glowPulse = 0.5 + Math.sin(t * 2) * 0.5
-    if (meshRef.current.material instanceof THREE.Material) {
-      meshRef.current.material.opacity = 0.4 + glowPulse * 0.3
-    }
-  })
-
-  return (
-    <mesh ref={meshRef} position={[0, -0.2, 0]}>
-      <torusGeometry args={[1.18, 0.04, 16, 100]} />
-      <meshBasicMaterial color="#00E5FF" transparent />
-    </mesh>
-  )
-}
-
 function InnerGlowParticles() {
   const groupRef = useRef<THREE.Group>(null)
   const particles = useMemo(() => {
@@ -300,8 +278,6 @@ export default function Jellyfish() {
           side={THREE.DoubleSide}
         />
       </mesh>
-
-      {/* Animated rim ring */}
       
 
       {/* Radial veins */}
