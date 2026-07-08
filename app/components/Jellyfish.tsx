@@ -1,10 +1,58 @@
 'use client'
 
 import { useRef, useMemo } from 'react'
-import { useFrame } from '@react-three/fiber'
-import { MeshTransmissionMaterial } from '@react-three/drei'
+import { useFrame, extend, type ThreeElement } from '@react-three/fiber'
+import { shaderMaterial } from '@react-three/drei'
 import * as THREE from 'three'
 import { useIsMobile } from '../hooks/useIsMobile'
+
+// Fresnel-driven emissive material — soft backlit translucency, no environment
+// reflections (the shader never samples scene.environment), replacing
+// MeshTransmissionMaterial's optical transmission look on the outer bell.
+const BellMaterial = shaderMaterial(
+  {
+    uColor: new THREE.Color('#0099CC'),
+    uRimColor: new THREE.Color('#AFFFFA'),
+    uFresnelPower: 2.2,
+    uOpacity: 0.85,
+    uIntensity: 1.4,
+  },
+  /* glsl vertex */ `
+    varying vec3 vNormal;
+    varying vec3 vViewDir;
+    void main() {
+      vNormal = normalize(normalMatrix * normal);
+      vec4 mvPosition = modelViewMatrix * vec4(position, 1.0);
+      vViewDir = normalize(-mvPosition.xyz);
+      gl_Position = projectionMatrix * mvPosition;
+    }
+  `,
+  /* glsl fragment */ `
+    varying vec3 vNormal;
+    varying vec3 vViewDir;
+    uniform vec3 uColor;
+    uniform vec3 uRimColor;
+    uniform float uFresnelPower;
+    uniform float uOpacity;
+    uniform float uIntensity;
+    void main() {
+      vec3 normal = normalize(vNormal);
+      vec3 viewDir = normalize(vViewDir);
+      float fresnel = pow(1.0 - clamp(dot(normal, viewDir), 0.0, 1.0), uFresnelPower);
+      vec3 color = mix(uColor, uRimColor, fresnel) * uIntensity;
+      float alpha = clamp(uOpacity * (0.35 + fresnel * 0.9), 0.0, 1.0);
+      gl_FragColor = vec4(color, alpha);
+    }
+  `
+)
+
+extend({ BellMaterial })
+
+declare module '@react-three/fiber' {
+  interface ThreeElements {
+    bellMaterial: ThreeElement<typeof BellMaterial>
+  }
+}
 
 function Tentacle({
   index, count, length = 7, color = '#1BFFD3', speed = 1, radius = 0.012,
@@ -236,17 +284,15 @@ export default function Jellyfish() {
             side={THREE.DoubleSide}
           />
         ) : (
-          <MeshTransmissionMaterial
-            backside
-            samples={4}
-            thickness={0.5}
-            roughness={0.08}
-            transmission={0.95}
-            ior={1.45}
-            chromaticAberration={0.08}
-            color="#00FFEE"
-            emissive="#00DDFF"
-            emissiveIntensity={0.7}
+          <bellMaterial
+            transparent
+            side={THREE.DoubleSide}
+            depthWrite={false}
+            uColor={new THREE.Color('#0099CC')}
+            uRimColor={new THREE.Color('#AFFFFA')}
+            uFresnelPower={2.2}
+            uOpacity={0.85}
+            uIntensity={1.4}
           />
         )}
       </mesh>
