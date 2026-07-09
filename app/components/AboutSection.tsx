@@ -29,11 +29,19 @@ if (isMobile) {
         margin: '0 auto 16px',
       }} />
       <div style={{ display: 'flex', gap: '12px', alignItems: 'center', marginBottom: '12px' }}>
-        <img
-          src="https://i.imgur.com/UbSen9R.jpeg"
-          alt="Anjali Zalani"
-          style={{ width: '48px', height: '48px', borderRadius: '50%', objectFit: 'cover', border: '1.5px solid rgba(0,229,255,0.3)', flexShrink: 0 }}
-        />
+        <div style={{
+          width: '48px', height: '48px', borderRadius: '50%',
+          overflow: 'hidden', border: '1.5px solid rgba(0,229,255,0.3)', flexShrink: 0,
+        }}>
+          <img
+            src="https://i.imgur.com/UbSen9R.jpeg"
+            alt="Anjali Zalani"
+            style={{
+              width: '100%', height: '100%',
+              objectFit: 'cover', objectPosition: '52% 33%', transform: 'scale(2.3)',
+            }}
+          />
+        </div>
         <div>
           <div style={{ fontSize: '18px', fontWeight: 300, color: 'white', fontFamily: 'var(--font-dm-sans)' }}>
             Anjali Zalani
@@ -76,7 +84,7 @@ if (isMobile) {
         <img
           src="https://i.imgur.com/UbSen9R.jpeg"
           alt="Anjali Zalani"
-          style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+          style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: '52% 33%', transform: 'scale(2.3)' }}
         />
       </div>
 
