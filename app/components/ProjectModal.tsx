@@ -3,6 +3,19 @@
 import { useEffect, useState } from 'react'
 import { ProjectData, ZONE_COLORS } from '../data/project'
 
+// fullDesc uses **word** for emphasis (written like markdown) but nothing
+// upstream ever parsed it, so paragraphs rendered the literal asterisks.
+// Splits on the marker pairs and renders the captured text as <strong>.
+function renderInlineBold(text: string) {
+  const parts = text.split(/(\*\*[^*]+\*\*)/g)
+  return parts.map((part, i) => {
+    if (part.startsWith('**') && part.endsWith('**')) {
+      return <strong key={i} style={{ color: 'rgba(255,255,255,0.85)', fontWeight: 600 }}>{part.slice(2, -2)}</strong>
+    }
+    return part
+  })
+}
+
 function getEmbedUrl(link?: string): string | null {
   if (!link) return null
   const drive = link.match(/drive\.google\.com\/file\/d\/([^/?]+)/)
@@ -174,7 +187,7 @@ export default function ProjectModal({
               lineHeight: 1.75, marginBottom: '16px',
               fontFamily: 'system-ui, sans-serif',
             }}>
-              {para}
+              {renderInlineBold(para)}
             </p>
           ))}
 

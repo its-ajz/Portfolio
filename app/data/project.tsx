@@ -103,10 +103,10 @@ Judges recognized it because it wasn't just data visualization — it was empath
 
 Coordinated the team across asset building, project management, and ensuring we shipped something cohesive in 12 hours while everyone was running on adrenaline. The speedrun forced hard creative decisions: what's essential? What can we cut? Results in tighter, more focused design.`,
     category: 'xr',
-    images: ['https://i.imgur.com/7lqwjjK.jpeg'],
-    videoLink: 'https://lnkd.in/gd-XdpKd',
+    images: ['/images/shade-la-1.jpg'],
+    videoLink: 'https://devpost.com/software/operation-atlas-blaze-edition',
     tags: ['Meta Quest', 'VR Design', 'Social Impact', 'Hackathon', 'Environmental Design'],
-    link: 'https://lnkd.in/gd-XdpKd',
+    link: 'https://devpost.com/software/operation-atlas-blaze-edition',
     position: [18, 2, -28],
     year: 2025,
     role: 'Project Lead, 3D Asset Design',
@@ -137,7 +137,7 @@ This was the first time building for a spatial computing platform I'd never seen
 **Key takeaway:**
 The future isn't "which platform wins." It's "which problems does each platform solve best?" Vision Pro for premium, tethered experiences. Snapdragon XR for lightweight, persistent, always-on AR. The tooling and thinking for each is already diverging.`,
     category: 'xr',
-    images: ['https://i.imgur.com/dcALKBj.jpeg'],
+    images: ['/images/android-xr-hackathon-1.jpg', '/images/android-xr-hackathon-2.jpg'],
     tags: ['Android XR', 'XREAL', 'ARCore', 'Spatial Computing', 'Hackathon'],
     link: 'https://lnkd.in/gEfjPuh3',
     position: [22, 0, -22],
@@ -167,10 +167,10 @@ Co-created with Cooper Queen. Huge thanks to Eve Nepo, Steven Dang, and Ethan Ry
 
 One of the most fun projects because it broke something technically while making something you actually want to experience.`,
     category: 'xr',
-    images: ['https://i.imgur.com/lqXtzj2.jpeg'],
-    videoLink: 'https://lnkd.in/g8u3me-H',
+    images: ['/images/its-a-date-1.jpg'],
+    videoLink: 'https://azalani.itch.io/its-a-date',
     tags: ['visionOS', 'SwiftUI', 'Immersive Video', 'Narrative Design', '180° Video'],
-    link: 'https://lnkd.in/g8u3me-H',
+    link: 'https://azalani.itch.io/its-a-date',
     position: [16, 1, -40],
     year: 2025,
     role: 'Co-Designer & Developer',
@@ -280,86 +280,22 @@ You don't need everything to work perfectly. Two robotic systems shipped (when w
 
 This is what I got excited about in Terra Labs — the community aspect. It only worked because people showed up for each other. Next semester as VP, that's what I'm building on.`,
     category: 'installation',
-    images: ['https://i.imgur.com/nx6yZvZ.jpeg'],
-    videoLink: 'https://drive.google.com/file/d/1NAw_HMRQjRLfuD89z_nzBgQzkhCOCjVS/view?usp=sharing',
+    images: [
+      '/images/terra-lumen-1.jpg',
+      '/images/terra-lumen-2.jpg',
+      '/images/terra-lumen-3.jpg',
+      '/images/terra-lumen-4.jpg',
+      '/images/terra-lumen-5.jpg',
+      '/images/terra-lumen-6.jpg',
+    ],
     tags: ['Project Leadership', 'Computer Vision', 'Projection Mapping', 'CNC Fabrication', 'Real-time Systems'],
-    link: 'https://drive.google.com/file/d/1NAw_HMRQjRLfuD89z_nzBgQzkhCOCjVS/view?usp=sharing',
+    link: 'https://www.uscterralabs.com/',
     position: [0, 5, -24],
     year: 2026,
     role: 'Director of Internals, Co-PM, Fabrication Lead',
   },
 
   // ── UI/UX ──────────────────────────────────────────────────────
-  {
-    id: 'docsdocs-redesign',
-    title: 'DocsDocs — Dental PMS Redesign',
-    shortDesc: 'Multi-page product redesign for a dental practice management platform. Information architecture, component systems, and AI-powered features.',
-    fullDesc: `Leading an ongoing multi-page redesign of DocsDocs, a dental practice management (PMS) platform. Working directly with the product team to reshape the entire UX across patient portals, provider dashboards, and AI-powered diagnostic tools.
-
-**Project scope:**
-- **Information architecture** across 6+ core user flows (appointment booking, patient records, billing, X-ray management)
-- **Toothmate AI page** — designing the interface for an AI-powered diagnostic assistant integrated into the PMS
-- **X-Ray AI page** — building the UX for AI-assisted image analysis and reporting
-- **Solutions page** — showcasing product capabilities for enterprise sales
-- **Component system** — creating reusable patterns that scale across the platform
-
-**Design approach:**
-Started with an audit against the original pitch deck. Identified gaps between promised features and actual UX. Rebuilt sections with clarity-first thinking: how do dental practices actually use this? What information do they need, in what order, and when?
-
-**Key challenges:**
-- Domain complexity: dental terminology, imaging workflows, compliance requirements
-- Balancing AI-powered features with human workflows (dentists need to trust the system)
-- Multi-user scenarios: patients, hygienists, dentists, office managers all use different parts
-- Real-world constraints: practices run on varying internet speeds, use older devices
-
-**Iterative process:**
-Built in Figma with structured metadata. Multiple rounds of design refinement. Testing assumptions with actual dental practices to validate information architecture decisions.
-
-**Why it matters:**
-This is product design at scale. Not just "make it look good" but "make the right information available at the right time for the right person." Every decision compounds across the whole platform.`,
-    category: 'uiux',
-    images: ['https://i.imgur.com/leO1e71.jpeg'],
-    tags: ['Figma', 'Product Design', 'Information Architecture', 'AI Integration', 'Healthcare SaaS'],
-    link: 'https://www.figma.com/design/docsdocs-redesign',
-    position: [18, 3, -46],
-    year: 2026,
-    role: 'Lead UX Designer',
-  },
-  {
-    id: 'henoyo-dashboard',
-    title: 'Henoyo — Enterprise CRM Dashboard',
-    shortDesc: 'UI/UX design for security-focused enterprise CRM. Built trust through clarity and reducing AI-centric aesthetics.',
-    fullDesc: `Designed a comprehensive CRM dashboard for Henoyo, an enterprise security SaaS platform. The core challenge wasn't the design — it was the positioning.
-
-**The problem:**
-Henoyo is AI-powered. But enterprise security teams don't buy products based on "AI." They buy products they trust. There's a difference. A big one.
-
-The design needed to feel trustworthy, competent, and professional — not flashy or hype-driven.
-
-**Design direction:**
-- **Less "AI," more "tool"** — Removed marketing-speak from the interface. Replaced gradient-heavy aesthetics with clean, utilitarian design
-- **Clear data hierarchy** — Security teams need to scan dashboards fast. Designed for scannability, not visual interest
-- **Transparency over mystery** — Show what the system is doing and why. If it's using AI/ML for threat detection, call it out clearly, but keep it straightforward
-- **Dark mode by default** — Reduces eye strain for teams monitoring 24/7. Also feels more "security operations"
-
-**Component work:**
-- Built a complete card system for different data types (alerts, user activity, threat logs)
-- Designed filter + sorting patterns for handling large datasets
-- Created a unified color system where color *means* something (not just aesthetic)
-
-**Outcome:**
-The redesign made Henoyo feel less like an AI startup and more like actual enterprise infrastructure. Quieter, more confident. Sales teams reported it helped close deals because security buyers immediately felt it was serious.
-
-**Key insight:**
-Sometimes the strongest design is the one that gets out of the way. Your product's credibility comes from what it does, not how flashy it looks.`,
-    category: 'uiux',
-    images: ['https://i.imgur.com/leO1e71.jpeg'],
-    tags: ['Figma', 'Dashboard Design', 'Enterprise SaaS', 'Brand Strategy', 'UX Research'],
-    link: 'https://www.figma.com/design/henoyo-dashboard',
-    position: [12, 2, -50],
-    year: 2025,
-    role: 'UX Designer',
-  },
   {
     id: 'gptfy-redesign',
     title: 'GPTfy — Salesforce AI Platform Redesign',
@@ -404,9 +340,9 @@ GPTfy solves a real Salesforce problem, but communicates like a generic AI compa
 **Why this matters:**
 Most SaaS redesigns focus on making things look better. This one is about making the value proposition clear to the right people, at the right time. GPTfy does something valuable — the website just needs to get out of the way and let that shine.`,
     category: 'uiux',
-    images: ['https://i.imgur.com/leO1e71.jpeg'],
+    images: ['/images/gptfy-homepage.jpg'],
     tags: ['Figma', 'Information Architecture', 'SaaS Design', 'Product Strategy', 'AI Integration'],
-    link: 'https://gptfy.ai',
+    link: 'https://gptfy.ai/',
     position: [14, 1, -48],
     year: 2026,
     role: 'UX Designer (Ongoing)',
@@ -442,7 +378,6 @@ The website shipped on Squarespace and handled growth well. The brand identity w
     category: 'uiux',
     images: ['https://i.imgur.com/PZscfOj.jpeg'],
     tags: ['Brand Design', 'Figma', 'E-commerce', 'Jitter', 'Squarespace'],
-    link: 'https://www.undercovercookies.com',
     position: [10, 0, -52],
     year: 2024,
     role: 'Brand Designer, Web Designer',
