@@ -17,6 +17,27 @@ function renderInlineBold(text: string) {
   })
 }
 
+// fullDesc separates paragraphs with \n\n but "- item" lines within a
+// paragraph are single-\n-separated — HTML collapses bare \n to a space,
+// so a bullet block rendered as one <p> read as "- item1 - item2 - item3"
+// on one line instead of an actual list. Groups each paragraph's lines
+// into consecutive text-run / bullet-list segments so bullets render as a
+// real <ul>, including paragraphs that open with a label line before the
+// list (e.g. "What we built:\n- thing one\n- thing two").
+function splitIntoBlocks(para: string): Array<{ type: 'text' | 'list'; lines: string[] }> {
+  const blocks: Array<{ type: 'text' | 'list'; lines: string[] }> = []
+  for (const line of para.split('\n')) {
+    const isBullet = line.trim().startsWith('- ')
+    const last = blocks[blocks.length - 1]
+    if (last && last.type === (isBullet ? 'list' : 'text')) {
+      last.lines.push(line)
+    } else {
+      blocks.push({ type: isBullet ? 'list' : 'text', lines: [line] })
+    }
+  }
+  return blocks
+}
+
 function getEmbedUrl(link?: string): string | null {
   if (!link) return null
   const drive = link.match(/drive\.google\.com\/file\/d\/([^/?]+)/)
@@ -269,13 +290,32 @@ export default function ProjectModal({
           <div style={{ height: '1px', background: `${color}22`, marginBottom: '24px' }} />
 
           {project.fullDesc.split('\n\n').map((para, i) => (
-            <p key={i} style={{
-              fontSize: '13px', color: 'rgba(255,255,255,0.55)',
-              lineHeight: 1.75, marginBottom: '16px',
-              fontFamily: 'system-ui, sans-serif',
-            }}>
-              {renderInlineBold(para)}
-            </p>
+            <div key={i} style={{ marginBottom: '16px' }}>
+              {splitIntoBlocks(para).map((block, j) =>
+                block.type === 'list' ? (
+                  <ul key={j} style={{
+                    margin: j === 0 ? '0 0 0 20px' : '8px 0 0 20px',
+                    padding: 0,
+                    fontSize: '13px', color: 'rgba(255,255,255,0.55)',
+                    lineHeight: 1.75, fontFamily: 'system-ui, sans-serif',
+                  }}>
+                    {block.lines.map((line, k) => (
+                      <li key={k} style={{ marginBottom: '4px' }}>
+                        {renderInlineBold(line.trim().replace(/^- /, ''))}
+                      </li>
+                    ))}
+                  </ul>
+                ) : (
+                  <p key={j} style={{
+                    fontSize: '13px', color: 'rgba(255,255,255,0.55)',
+                    lineHeight: 1.75, margin: j === 0 ? 0 : '8px 0 0',
+                    fontFamily: 'system-ui, sans-serif',
+                  }}>
+                    {renderInlineBold(block.lines.join(' '))}
+                  </p>
+                )
+              )}
+            </div>
           ))}
 
           {project.link && (
