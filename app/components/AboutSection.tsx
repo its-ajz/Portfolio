@@ -38,7 +38,7 @@ if (isMobile) {
             alt="Anjali Zalani"
             style={{
               width: '100%', height: '100%',
-              objectFit: 'cover', transform: 'scale(2.3) translate(3%, 16%)',
+              objectFit: 'cover', transform: 'scale(2.0) translate(3%, 16%)',
             }}
           />
         </div>
@@ -84,7 +84,7 @@ if (isMobile) {
         <img
           src="https://i.imgur.com/UbSen9R.jpeg"
           alt="Anjali Zalani"
-          style={{ width: '100%', height: '100%', objectFit: 'cover', transform: 'scale(2.3) translate(3%, 16%)' }}
+          style={{ width: '100%', height: '100%', objectFit: 'cover', transform: 'scale(2.0) translate(3%, 16%)' }}
         />
       </div>
 
