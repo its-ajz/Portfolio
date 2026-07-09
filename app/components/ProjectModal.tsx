@@ -1,7 +1,8 @@
 'use client'
 
 import { useEffect, useState } from 'react'
-import { ProjectData, ZONE_COLORS } from '../data/project'
+import { ProjectData, ZONE_COLORS, ALL_PROJECTS } from '../data/project'
+import { useIsMobile } from '../hooks/useIsMobile'
 
 // fullDesc uses **word** for emphasis (written like markdown) but nothing
 // upstream ever parsed it, so paragraphs rendered the literal asterisks.
@@ -26,13 +27,34 @@ function getEmbedUrl(link?: string): string | null {
 export default function ProjectModal({
   project,
   onClose,
+  onNavigate,
 }: {
   project: ProjectData
   onClose: () => void
+  onNavigate: (project: ProjectData) => void
 }) {
   const color = ZONE_COLORS[project.category]
   const embedUrl = getEmbedUrl(project.videoLink || project.link)
   const [imgIndex, setImgIndex] = useState(0)
+  const isMobile = useIsMobile()
+
+  // Same-section project switching without closing the modal. Order follows
+  // ALL_PROJECTS (projects are already grouped by category there), wrapping
+  // around at the ends.
+  const sectionProjects = ALL_PROJECTS.filter(p => p.category === project.category)
+  const sectionIndex = sectionProjects.findIndex(p => p.id === project.id)
+  const prevProject = sectionProjects.length > 1
+    ? sectionProjects[(sectionIndex - 1 + sectionProjects.length) % sectionProjects.length]
+    : null
+  const nextProject = sectionProjects.length > 1
+    ? sectionProjects[(sectionIndex + 1) % sectionProjects.length]
+    : null
+
+  // Reset to the first image whenever the open project changes (the modal
+  // instance is reused across navigation, not remounted).
+  useEffect(() => {
+    setImgIndex(0)
+  }, [project.id])
 
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
@@ -64,6 +86,7 @@ export default function ProjectModal({
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
+    gap: '16px',
     padding: '24px',
   }
 
@@ -97,6 +120,42 @@ export default function ProjectModal({
     justifyContent: 'center',
   }
 
+  const projectNavBtnStyle: React.CSSProperties = {
+    flexShrink: 0,
+    background: 'rgba(0,0,0,0.5)',
+    border: '1px solid rgba(255,255,255,0.15)',
+    color: 'white',
+    width: '40px',
+    height: '40px',
+    borderRadius: '50%',
+    cursor: 'pointer',
+    fontSize: '20px',
+    lineHeight: 1,
+    zIndex: 600,
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+  }
+
+  const imageNavBtnStyle: React.CSSProperties = {
+    position: 'absolute',
+    top: '50%',
+    transform: 'translateY(-50%)',
+    background: 'rgba(0,0,0,0.45)',
+    border: '1px solid rgba(255,255,255,0.15)',
+    color: 'white',
+    width: '30px',
+    height: '30px',
+    borderRadius: '50%',
+    cursor: 'pointer',
+    fontSize: '16px',
+    lineHeight: 1,
+    zIndex: 5,
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+  }
+
   const viewLinkStyle: React.CSSProperties = {
     display: 'inline-block',
     marginTop: '8px',
@@ -113,6 +172,18 @@ export default function ProjectModal({
 
   return (
     <div onClick={onClose} style={overlayStyle}>
+      {!isMobile && (
+        prevProject ? (
+          <button
+            onClick={(e) => { e.stopPropagation(); onNavigate(prevProject) }}
+            style={projectNavBtnStyle}
+            aria-label="Previous project"
+          >
+            ‹
+          </button>
+        ) : <div style={{ width: '40px', flexShrink: 0 }} />
+      )}
+
       <div onClick={(e) => e.stopPropagation()} style={panelStyle}>
 
         <button onClick={onClose} style={closeBtnStyle}>×</button>
@@ -131,22 +202,38 @@ export default function ProjectModal({
               style={{ width: '100%', height: '320px', objectFit: 'cover', display: 'block' }}
             />
             {project.images.length > 1 && (
-              <div style={{
-                position: 'absolute', bottom: '12px', left: '50%',
-                transform: 'translateX(-50%)', display: 'flex', gap: '6px',
-              }}>
-                {project.images.map((_, i) => (
-                  <div
-                    key={i}
-                    onClick={() => setImgIndex(i)}
-                    style={{
-                      width: '6px', height: '6px', borderRadius: '50%',
-                      background: i === imgIndex ? color : 'rgba(255,255,255,0.3)',
-                      cursor: 'pointer',
-                    }}
-                  />
-                ))}
-              </div>
+              <>
+                <button
+                  onClick={(e) => { e.stopPropagation(); setImgIndex(i => (i - 1 + project.images.length) % project.images.length) }}
+                  style={{ ...imageNavBtnStyle, left: '10px' }}
+                  aria-label="Previous image"
+                >
+                  ‹
+                </button>
+                <button
+                  onClick={(e) => { e.stopPropagation(); setImgIndex(i => (i + 1) % project.images.length) }}
+                  style={{ ...imageNavBtnStyle, right: '10px' }}
+                  aria-label="Next image"
+                >
+                  ›
+                </button>
+                <div style={{
+                  position: 'absolute', bottom: '12px', left: '50%',
+                  transform: 'translateX(-50%)', display: 'flex', gap: '6px',
+                }}>
+                  {project.images.map((_, i) => (
+                    <div
+                      key={i}
+                      onClick={(e) => { e.stopPropagation(); setImgIndex(i) }}
+                      style={{
+                        width: '6px', height: '6px', borderRadius: '50%',
+                        background: i === imgIndex ? color : 'rgba(255,255,255,0.3)',
+                        cursor: 'pointer',
+                      }}
+                    />
+                  ))}
+                </div>
+              </>
             )}
           </div>
         )}
@@ -199,6 +286,18 @@ export default function ProjectModal({
 
         </div>
       </div>
+
+      {!isMobile && (
+        nextProject ? (
+          <button
+            onClick={(e) => { e.stopPropagation(); onNavigate(nextProject) }}
+            style={projectNavBtnStyle}
+            aria-label="Next project"
+          >
+            ›
+          </button>
+        ) : <div style={{ width: '40px', flexShrink: 0 }} />
+      )}
     </div>
   )
 }

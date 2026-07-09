@@ -102,6 +102,7 @@ export default function Home() {
         <ProjectModal
           project={activeProject}
           onClose={() => setActiveProject(null)}
+          onNavigate={setActiveProject}
         />
       )}
     </>

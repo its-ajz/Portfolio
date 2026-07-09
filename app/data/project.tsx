@@ -33,14 +33,14 @@ export const ALL_PROJECTS: ProjectData[] = [
   // ── XR / SPATIAL ─────────────────────────────────────────────
   {
     id: 'xr-mural',
-    title: 'AR Scavenger Hunt — Vision Pro',
+    title: 'AR Scavenger Hunt: Vision Pro',
     shortDesc: 'World-anchored mixed-reality experience transforming physical architecture into an interactive spatial playground.',
-    fullDesc: `Built an immersive AR scavenger hunt for Apple Vision Pro that turned a physical mural and surrounding architecture into a playable mixed-reality system. The goal was to encourage spatial exploration and embodied interaction — replacing traditional 2D UI with hand tracking, movement, and real-world anchoring.
+    fullDesc: `Built an immersive AR scavenger hunt for Apple Vision Pro that turned a physical mural and surrounding architecture into a playable mixed-reality system. The goal was to encourage spatial exploration and embodied interaction: replacing traditional 2D UI with hand tracking, movement, and real-world anchoring.
 
 **Core interactions:**
 Hand-tracked projectile system where users physically aim and launch virtual planes to collect objects scattered in 3D space. Gesture-based pinch input with collision detection and state tracking.
 
-Persistent message board anchored in the environment — users could leave 3D notes and emojis that stayed in place across sessions, creating layered interaction over time.
+Persistent message board anchored in the environment: users could leave 3D notes and emojis that stayed in place across sessions, creating layered interaction over time.
 
 **Technical approach:**
 Started with an iOS prototype to figure out the core interaction before moving to visionOS/RealityKit. Got hands-on with the challenges: hand tracking inconsistency, anchor drift, animation timing, interaction distance tuning. Weeks of iteration to make gestures feel natural in 3D space.
@@ -57,9 +57,9 @@ The final experience worked. People understood it immediately and spent time exp
   },
   {
     id: 'project-atlas',
-    title: 'Project Atlas — VR Horror Experience',
+    title: 'Project Atlas: VR Horror Experience',
     shortDesc: 'Hackathon VR prototype using environmental storytelling and psychological tension through lighting and space.',
-    fullDesc: `Built a VR horror experience in a team of three during Viverse Spark Hackathon. The focus was on environmental storytelling — using lighting, spatial design, and interaction triggers to control pacing and create psychological tension rather than jump scares.
+    fullDesc: `Built a VR horror experience in a team of three during Viverse Spark Hackathon. The focus was on environmental storytelling: using lighting, spatial design, and interaction triggers to control pacing and create psychological tension rather than jump scares.
 
 **Design philosophy:**
 Constrain space. Control visibility. Guide emotion through light.
@@ -74,7 +74,7 @@ Constrain space. Control visibility. Guide emotion through light.
 **Why this approach:**
 Horror works best when players imagine the worst thing. Keep them in the dark (literally). Make them lean into the unknown. The environment becomes the threat.
 
-Realized during this project how much of game design is about controlling what players can see and predict. You're not creating fear — you're creating the conditions where fear naturally emerges.
+Realized during this project how much of game design is about controlling what players can see and predict. You're not creating fear: you're creating the conditions where fear naturally emerges.
 
 Shipped something cohesive under time pressure. Not every asset was perfect, but the vibe was there. That's what mattered.`,
     category: 'xr',
@@ -88,18 +88,18 @@ Shipped something cohesive under time pressure. Not every asset was perfect, but
   },
   {
     id: 'shade-la',
-    title: 'ShadeLA — VR Experience',
+    title: 'ShadeLA: VR Experience',
     shortDesc: 'First-place hackathon VR experience tackling LA\'s urban heat inequality through embodied gameplay.',
     fullDesc: `A VR experience built in 12 hours at RealityShift (USC's first XR hackathon) that turned data about LA's shade inequality into something you could actually feel. Won against 80+ competitors.
 
 **The problem:** Some LA neighborhoods have 4x more tree canopy than others, resulting in ~11°F temperature differences. People know it's hot. They don't feel what that difference means for different communities.
 
-**The solution:** Meta Quest VR experience set in Pico Union, one of LA's least-shaded neighborhoods. Players had to complete quests while overheating and dehydrating — moving between sparse shaded areas, collecting water, trying to survive long enough to finish objectives.
+**The solution:** Meta Quest VR experience set in Pico Union, one of LA's least-shaded neighborhoods. Players had to complete quests while overheating and dehydrating: moving between sparse shaded areas, collecting water, trying to survive long enough to finish objectives.
 
 The game was intentionally harsh. The sun is relentless. You feel the weight of those temperature differences when you're running out of water and there's nowhere to cool down.
 
 **The outcome:**
-Judges recognized it because it wasn't just data visualization — it was empathy through experience. Made an abstract problem visceral.
+Judges recognized it because it wasn't just data visualization: it was empathy through experience. Made an abstract problem visceral.
 
 Coordinated the team across asset building, project management, and ensuring we shipped something cohesive in 12 hours while everyone was running on adrenaline. The speedrun forced hard creative decisions: what's essential? What can we cut? Results in tighter, more focused design.`,
     category: 'xr',
@@ -113,14 +113,14 @@ Coordinated the team across asset building, project management, and ensuring we 
   },
   {
     id: 'android-xr-hackathon',
-    title: 'Android XR Hackathon — XREAL Project Aura',
+    title: 'Android XR Hackathon: XREAL Project Aura',
     shortDesc: 'Two-day AR spatial computing hackathon building for cutting-edge XREAL Project Aura glasses alongside engineers from Google, Qualcomm, Unity, and XREAL.',
-    fullDesc: `Participated in the Android XR Hackathon in Long Beach (June 2026) — a two-day sprint building for XREAL Project Aura, next-gen AR glasses powered by Google.
+    fullDesc: `Participated in the Android XR Hackathon in Long Beach (June 2026): a two-day sprint building for XREAL Project Aura, next-gen AR glasses powered by Google.
 
 **The experience:**
 Two days working on hardware I'd never used before. Built alongside engineers and developers from Google, Google DeepMind, Qualcomm, Unity, Unreal Engine, Godot Engine, Snapdragon, and XREAL. In the same room: CEOs who've shaped AR, people who've been in this space for years, people just getting started, people from all over the world.
 
-What made it special wasn't the competition — it was listening to how differently everyone thinks about building for XR. Each perspective reflected a different vision of where spatial computing goes next.
+What made it special wasn't the competition: it was listening to how differently everyone thinks about building for XR. Each perspective reflected a different vision of where spatial computing goes next.
 
 **What I built:**
 An AR sea creature experience using free-roaming creatures tied to ARPlane detection. Users could pinch to "catch" creatures. Each creature had different behaviors. A "Marina" companion AI provided narration using Android TTS. Creature collection persisted via PlayerPrefs.
@@ -146,12 +146,12 @@ The future isn't "which platform wins." It's "which problems does each platform 
   },
   {
     id: 'its-a-date',
-    title: 'It\'s a Date! — VR Choose-Your-Own-Adventure',
+    title: 'It\'s a Date!: VR Choose-Your-Own-Adventure',
     shortDesc: 'Immersive branching narrative on Apple Vision Pro where every choice changes the story (and the ending gets chaotic).',
     fullDesc: `Built a 180° immersive video experience for Apple Vision Pro where you're dropped directly into a first-person date scenario. Every choice branches the narrative. Some endings are wholesome. Some spiral into complete chaos. One inexplicably turns into a stalker thriller.
 
 **Technical approach:**
-Shot all footage on an Insta360 X4 (true 180° video). Built natively in SwiftUI/Xcode for Vision Pro. The entire branching system runs through a JSON architecture — each decision loads a different video path and outcome.
+Shot all footage on an Insta360 X4 (true 180° video). Built natively in SwiftUI/Xcode for Vision Pro. The entire branching system runs through a JSON architecture: each decision loads a different video path and outcome.
 
 Key technical challenges:
 - Wrapping 180° video onto an inverted sphere mesh to make it actually feel immersive
@@ -177,7 +177,7 @@ One of the most fun projects because it broke something technically while making
   },
   {
     id: 'nike-rage',
-    title: 'Nike Rage Room — Experience Concept',
+    title: 'Nike Rage Room: Experience Concept',
     shortDesc: 'Immersive wellness experience pitch: controlled environment where physical expression becomes emotional release.',
     fullDesc: `Designed an immersive rage room concept focused on stress release through intentional physical interaction. Developed the full experience flow, spatial layout, and interaction design to create a branded wellness activation for Nike.
 
@@ -206,7 +206,7 @@ Pitched this to Nike as a branded experience concept. Even though it didn't ship
   // ── INSTALLATIONS ─────────────────────────────────────────────
   {
     id: 'band-together',
-    title: 'Band Together — Interactive Installation',
+    title: 'Band Together: Interactive Installation',
     shortDesc: 'Large-scale sensor-triggered installation where movement through space reconstructs a song instrument-by-instrument.',
     fullDesc: `A 3000+ person festival installation that transformed a song into a physical, walkable experience. Built as a guitar-shaped structure from 12-gauge wire where each section represented a different instrument (bass, drums, lead, rhythm, vocal).
 
@@ -232,8 +232,8 @@ Led this as my first big project, which meant material sourcing, scheduling, pro
   },
   {
     id: 'synesthesia',
-    title: 'Synesthesia — Audio-Visual Installation',
-    shortDesc: 'Interactive installation where sound becomes visible — users manipulate audio to drive real-time generative projections.',
+    title: 'Synesthesia: Audio-Visual Installation',
+    shortDesc: 'Interactive installation where sound becomes visible: users manipulate audio to drive real-time generative projections.',
     fullDesc: `An immersive installation exploring what happens when sound and sight blend. Built interactive DJ podiums where users could manipulate music (via mixer boards with knobs and sliders) and immediately see the audio spectrum transform into evolving projected visuals on custom-designed boards.
 
 **The system:**
@@ -242,7 +242,7 @@ Audio input → TouchDesigner receives frequency data → generative visuals com
 Frequency mapped to color palette. Amplitude controlled animation speed. Rhythm shaped pattern behavior. Everything reactive, nothing pre-baked.
 
 **The build:**
-Started with 4ft × 8ft boards we had to fabricate and paint. Mid-way discovered boards were flipped wrong — they didn't line up. Solution: repaint them last-minute. Then had to shift the entire layout during final setup to make everything balance in the space. Not ideal timing, but it worked.
+Started with 4ft × 8ft boards we had to fabricate and paint. Mid-way discovered boards were flipped wrong: they didn't line up. Solution: repaint them last-minute. Then had to shift the entire layout during final setup to make everything balance in the space. Not ideal timing, but it worked.
 
 **What people experienced:**
 Walk up to podium → talk, play music, sing → watch your voice turn into color and motion in real-time. That feedback loop was the whole point. And it worked. People understood it immediately, brought friends over, and stayed to experiment.
@@ -258,7 +258,7 @@ First time thinking deeply about how physical interaction shapes digital output 
   },
   {
     id: 'terra-lumen',
-    title: 'Terra Labs Demo Day — Volcano Installation',
+    title: 'Terra Labs Demo Day: Volcano Installation',
     shortDesc: '12ft interactive volcano with eye-tracking portals, projection mapping, and real-time body tracking for 100+ visitors.',
     fullDesc: `Led the physical build and coordination for Terra Labs' first demo day: a 12ft long, 8ft tall volcano we designed and CNC'd ourselves. Around it, everything was interactive and real-time responsive.
 
@@ -270,15 +270,15 @@ First time thinking deeply about how physical interaction shapes digital output 
 - Robotic dog with LED liquid simulations + drink dispensing (Glyph team's work)
 
 **My role:**
-Director of Internals + co-PM on Lumen. Mostly meant: keeping the club running while building alongside everyone else. Coordinating across teams, making sure things stayed on track, bridging communication when different technical systems had to sync. I was also hands-on with the build — CNC'ing, assembling structural pieces, problem-solving as things broke.
+Director of Internals + co-PM on Lumen. Mostly meant: keeping the club running while building alongside everyone else. Coordinating across teams, making sure things stayed on track, bridging communication when different technical systems had to sync. I was also hands-on with the build: CNC'ing, assembling structural pieces, problem-solving as things broke.
 
 **The outcome:**
-20–25 people built it. 100+ showed up to experience it. People didn't just walk through — they stayed, explored, went back to things, brought friends. They made it theirs.
+20–25 people built it. 100+ showed up to experience it. People didn't just walk through: they stayed, explored, went back to things, brought friends. They made it theirs.
 
 **What surprised me:**
 You don't need everything to work perfectly. Two robotic systems shipped (when we planned three). Some projection elements were makeshift. But people interacted with it with genuine excitement. They felt the team's energy in the build.
 
-This is what I got excited about in Terra Labs — the community aspect. It only worked because people showed up for each other. Next semester as VP, that's what I'm building on.`,
+This is what I got excited about in Terra Labs: the community aspect. It only worked because people showed up for each other. Next semester as VP, that's what I'm building on.`,
     category: 'installation',
     images: [
       '/images/terra-lumen-1.jpg',
@@ -298,7 +298,7 @@ This is what I got excited about in Terra Labs — the community aspect. It only
   // ── UI/UX ──────────────────────────────────────────────────────
   {
     id: 'gptfy-redesign',
-    title: 'GPTfy — Salesforce AI Platform Redesign',
+    title: 'GPTfy: Salesforce AI Platform Redesign',
     shortDesc: 'Site audit and redesign for a Salesforce-native agentic AI platform. Navigation architecture, chatbot integration, pricing structure.',
     fullDesc: `Leading the UX redesign of gptfy.ai, a Salesforce-native agentic AI platform that lets enterprises automate complex workflows within their CRM.
 
@@ -332,13 +332,13 @@ GPTfy solves a real Salesforce problem, but communicates like a generic AI compa
    - Shows ROI in Salesforce terms (time saved × hourly cost)
 
 4. **Chatbot strategy**
-   - Not a gimmick — actual navigation tool
+   - Not a gimmick: actual navigation tool
    - Understands visitor journey ("Do you already use Salesforce?" → different info)
    - Captures leads naturally without aggressive CTAs
    - Stays in-brand while being genuinely useful
 
 **Why this matters:**
-Most SaaS redesigns focus on making things look better. This one is about making the value proposition clear to the right people, at the right time. GPTfy does something valuable — the website just needs to get out of the way and let that shine.`,
+Most SaaS redesigns focus on making things look better. This one is about making the value proposition clear to the right people, at the right time. GPTfy does something valuable: the website just needs to get out of the way and let that shine.`,
     category: 'uiux',
     images: ['/images/gptfy-homepage.jpg'],
     tags: ['Figma', 'Information Architecture', 'SaaS Design', 'Product Strategy', 'AI Integration'],
@@ -349,7 +349,7 @@ Most SaaS redesigns focus on making things look better. This one is about making
   },
   {
     id: 'undercover-cookies',
-    title: 'Undercover Cookies — Brand Identity & Web',
+    title: 'Undercover Cookies: Brand Identity & Web',
     shortDesc: 'Full brand identity, e-commerce design, and animation for a specialty cookie brand.',
     fullDesc: `Designed complete brand identity and digital experience for Undercover Cookies, a specialty cookie company with a distinctive brand voice.
 
@@ -362,7 +362,7 @@ Most SaaS redesigns focus on making things look better. This one is about making
 - Squarespace implementation
 
 **Design thinking:**
-Undercover Cookies isn't just "good cookies" — it's personality-driven. The brand needed to feel playful, slightly irreverent, but still premium. Design had to match that tone.
+Undercover Cookies isn't just "good cookies": it's personality-driven. The brand needed to feel playful, slightly irreverent, but still premium. Design had to match that tone.
 
 **Key elements:**
 - Logo that works as illustration and icon
@@ -374,7 +374,7 @@ Undercover Cookies isn't just "good cookies" — it's personality-driven. The br
 Used Jitter for product showcases and hero animations. Motion reinforced the playful brand voice without being distracting.
 
 **Outcome:**
-The website shipped on Squarespace and handled growth well. The brand identity was cohesive across social, packaging, and digital — which is hard to pull off as a one-person design + brand lead situation.`,
+The website shipped on Squarespace and handled growth well. The brand identity was cohesive across social, packaging, and digital: which is hard to pull off as a one-person design + brand lead situation.`,
     category: 'uiux',
     images: ['https://i.imgur.com/PZscfOj.jpeg'],
     tags: ['Brand Design', 'Figma', 'E-commerce', 'Jitter', 'Squarespace'],
@@ -384,7 +384,7 @@ The website shipped on Squarespace and handled growth well. The brand identity w
   },
   {
     id: 'healmed-design',
-    title: 'HealMed — Healthcare Platform Design',
+    title: 'HealMed: Healthcare Platform Design',
     shortDesc: 'Website UI/UX redesign for a patient-provider healthcare platform. Focus on accessibility and trust.',
     fullDesc: `Designed website UI and UX flows for HealMed, a platform connecting patients with healthcare providers. The core challenge: make healthcare feel human, not clinical or corporate.
 
@@ -412,7 +412,7 @@ Healthcare platforms are often sterile because they prioritize compliance over e
 - Clear language (avoided jargon where possible)
 
 **Outcome:**
-The redesign improved onboarding completion rates and user satisfaction scores. Proved that healthcare UX doesn't have to be boring — it just has to be honest.`,
+The redesign improved onboarding completion rates and user satisfaction scores. Proved that healthcare UX doesn't have to be boring: it just has to be honest.`,
     category: 'uiux',
     images: ['https://i.imgur.com/leO1e71.jpeg'],
     tags: ['Figma', 'Healthcare', 'Accessibility', 'Product Design'],
@@ -426,7 +426,7 @@ The redesign improved onboarding completion rates and user satisfaction scores. 
   {
     id: 'chameleon',
     title: 'Chameleon Portrait',
-    shortDesc: 'Digital art — expressive portrait study.',
+    shortDesc: 'Digital art: expressive portrait study.',
     fullDesc: 'A digital portrait study exploring texture, color, and character through the subject of a chameleon. Created using digital painting techniques focusing on iridescent color transitions and detailed surface texture.',
     category: 'art',
     images: ['https://i.imgur.com/ny3ECuL.jpeg'],
@@ -446,7 +446,7 @@ The redesign improved onboarding completion rates and user satisfaction scores. 
   {
     id: 'connecting',
     title: 'Connecting',
-    shortDesc: 'Mixed media — graphite and string.',
+    shortDesc: 'Mixed media: graphite and string.',
     fullDesc: 'A mixed media work combining graphite drawing with physical string elements. The piece explores themes of connection, relationship, and the tension between two-dimensional mark-making and three-dimensional materiality.',
     category: 'art',
     images: ['https://i.imgur.com/nQU6RnZ.jpeg'],
@@ -456,7 +456,7 @@ The redesign improved onboarding completion rates and user satisfaction scores. 
   {
     id: 'northern-lights',
     title: 'Northern Lights',
-    shortDesc: 'Linocut print — atmospheric abstraction.',
+    shortDesc: 'Linocut print: atmospheric abstraction.',
     fullDesc: 'A linocut print capturing the abstract, layered quality of the aurora borealis. Relief printing technique used to build up translucent color layers that mimic the movement of light across a night sky.',
     category: 'art',
     images: ['https://i.imgur.com/C41fLzj.jpeg'],
@@ -466,8 +466,8 @@ The redesign improved onboarding completion rates and user satisfaction scores. 
   {
     id: 'collisions',
     title: 'Collisions',
-    shortDesc: 'Digital art — abstract composition.',
-    fullDesc: 'A digital artwork exploring the visual language of collision — the moment two forces meet and transform each other. Uses sharp geometric forms against organic marks to create dynamic tension.',
+    shortDesc: 'Digital art: abstract composition.',
+    fullDesc: 'A digital artwork exploring the visual language of collision: the moment two forces meet and transform each other. Uses sharp geometric forms against organic marks to create dynamic tension.',
     category: 'art',
     images: ['https://i.imgur.com/k7PVfxd.jpeg'],
     tags: ['Digital Art', 'Abstract'],
@@ -479,7 +479,7 @@ The redesign improved onboarding completion rates and user satisfaction scores. 
     id: 'accessibility',
     title: 'Digital Accessibility Research',
     shortDesc: '6-month research project: how accessibility features in games change player understanding and inclusion.',
-    fullDesc: `A research project exploring the relationship between accessibility design and player empathy. Spent 6 months analyzing how accessibility features in video games influence player experience and inclusion — not from a compliance angle, but from a human one.
+    fullDesc: `A research project exploring the relationship between accessibility design and player empathy. Spent 6 months analyzing how accessibility features in video games influence player experience and inclusion: not from a compliance angle, but from a human one.
 
 **The research questions:**
 How do adaptive controls change the way players approach problem-solving? Does haptic feedback improve comprehension for players with visual impairments? Can accessibility systems (when designed well) actually improve experience for *everyone*?
@@ -491,7 +491,7 @@ How do adaptive controls change the way players approach problem-solving? Does h
 - Documented how design decisions create or eliminate barriers to understanding
 
 **The insights:**
-Accessibility isn't a feature — it's a design philosophy. Games that think about multiple input methods, multiple sensory channels, and multiple difficulty approaches end up being better games, period. Players with disabilities often *prefer* games with strong accessibility — not because they need it, but because it's better designed.
+Accessibility isn't a feature: it's a design philosophy. Games that think about multiple input methods, multiple sensory channels, and multiple difficulty approaches end up being better games, period. Players with disabilities often *prefer* games with strong accessibility: not because they need it, but because it's better designed.
 
 **Why this mattered:**
 Most accessibility discussion is about compliance. This was about empathy through data. Showed that accessible design is good design. Published research paper + video documentation through Polygence.`,

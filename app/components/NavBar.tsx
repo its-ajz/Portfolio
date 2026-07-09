@@ -50,9 +50,17 @@ export default function NavBar({ scrollT }: { scrollT: number }) {
 
   return (
     <nav style={navStyle}>
-      <button style={logoStyle} onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>
-        Anjali Zalani
-      </button>
+      <div style={{ display: 'flex', alignItems: 'baseline', gap: '8px' }}>
+        <button style={logoStyle} onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>
+          Anjali Zalani
+        </button>
+        <span style={{
+          fontSize: '10px', fontWeight: 300, color: 'rgba(255,255,255,0.3)',
+          letterSpacing: '0.03em', fontFamily: 'var(--font-dm-sans)',
+        }}>
+          an-jelly(fish)
+        </span>
+      </div>
 
       {!isMobile && (
         <div style={{ display: 'flex', gap: '36px' }}>

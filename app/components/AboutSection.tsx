@@ -44,7 +44,7 @@ if (isMobile) {
         </div>
       </div>
       <p style={{ fontSize: '12px', color: 'rgba(255,255,255,0.55)', lineHeight: 1.6, fontFamily: 'var(--font-dm-sans)' }}>
-        I design experiences you can step inside — from Apple Vision Pro spatial systems to large-scale physical installations.
+        I design experiences you can step inside: from Apple Vision Pro spatial systems to large-scale physical installations.
       </p>
     </div>
   )
@@ -128,7 +128,7 @@ if (isMobile) {
         marginBottom: '16px',
         fontFamily: 'var(--font-dm-sans)',
       }}>
-        I design experiences you can step inside. From Apple Vision Pro spatial systems to large-scale physical installations, I work at the intersection of digital and physical — building environments that respond, react, and stay with you.
+        I design experiences you can step inside. From Apple Vision Pro spatial systems to large-scale physical installations, I work at the intersection of digital and physical: building environments that respond, react, and stay with you.
       </p>
 
       <p style={{

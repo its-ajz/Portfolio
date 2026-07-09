@@ -9,10 +9,10 @@ const dmSans = DM_Sans({
 })
 
 export const metadata: Metadata = {
-  title: 'Anjali Zalani — Immersive Experience Designer',
+  title: 'Anjali Zalani: Immersive Experience Designer',
   description: 'I design experiences you can step inside. XR, spatial computing, interactive installations, and creative technology. Student at USC Iovine and Young Academy.',
   openGraph: {
-    title: 'Anjali Zalani — Immersive Experience Designer',
+    title: 'Anjali Zalani: Immersive Experience Designer',
     description: 'XR, spatial computing, interactive installations.',
     url: 'https://anjalizalani.com',
     siteName: 'Anjali Zalani',
