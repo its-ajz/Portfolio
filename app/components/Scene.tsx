@@ -1,6 +1,6 @@
 'use client'
 
-import { useRef } from 'react'
+import { useRef, useState, useEffect } from 'react'
 import { Canvas } from '@react-three/fiber'
 import { EffectComposer, Bloom, Vignette, ChromaticAberration } from '@react-three/postprocessing'
 import { BlendFunction } from 'postprocessing'
@@ -12,9 +12,22 @@ import ScrollManager from './ScrollManager'
 import ProjectNodes from './ProjectNodes'
 import { Environment } from '@react-three/drei'
 
-export default function Scene() {
+export default function Scene({ onReady }: { onReady?: () => void }) {
   const jellyfishPos = useRef(new THREE.Vector3(0, 0, 0))
   const isMobile     = useIsMobile()
+  // The render loop otherwise runs at "always" forever, full quality, even
+  // in a backgrounded/hidden tab — nothing was gating it on visibility.
+  // frameloop="never" fully stops R3F's rAF loop while hidden; switching
+  // back to "always" on return picks up exactly where the continuous
+  // ambient animations (pulse, particles, tentacles) left off, no state
+  // to reconcile.
+  const [visible, setVisible] = useState(true)
+
+  useEffect(() => {
+    const handler = () => setVisible(document.visibilityState === 'visible')
+    document.addEventListener('visibilitychange', handler)
+    return () => document.removeEventListener('visibilitychange', handler)
+  }, [])
 
   return (
     <Canvas
@@ -22,9 +35,11 @@ export default function Scene() {
       camera={{ position: [0, 3, 14], fov: 60 }}
       dpr={isMobile ? 0.8 : [1, 2]}
       gl={{ antialias: true }}
+      frameloop={visible ? 'always' : 'never'}
       onCreated={({ gl }) => {
         gl.toneMapping = ACESFilmicToneMapping
         gl.toneMappingExposure = 0.9
+        onReady?.()
       }}
     >
       <color attach="background" args={['#020818']} />

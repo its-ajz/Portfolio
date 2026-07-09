@@ -63,6 +63,7 @@ export default function WorkSidebar({ scrollT }: { scrollT: number }) {
         <div style={{
           display: 'flex', gap: '10px',
           overflowX: 'auto', overflowY: 'hidden',
+          overscrollBehavior: 'contain',
           padding: '4px 20px 24px',
           flexShrink: 0,
           scrollbarWidth: 'none',
@@ -112,6 +113,7 @@ export default function WorkSidebar({ scrollT }: { scrollT: number }) {
       zIndex: 150, opacity,
       width: '280px', maxHeight: '80vh',
       overflowY: 'auto',
+      overscrollBehavior: 'contain',
       display: 'flex', flexDirection: 'column', gap: '10px',
     }}>
       <p style={{

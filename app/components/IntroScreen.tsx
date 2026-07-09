@@ -3,7 +3,16 @@
 import { useEffect, useState } from 'react'
 import { useIsMobile } from '../hooks/useIsMobile'
 
-export default function IntroScreen({ onEnter }: { onEnter: () => void }) {
+export default function IntroScreen({
+  onEnter,
+  onClickStart,
+}: {
+  onEnter: () => void
+  // Fires the instant the click lands, ahead of onEnter (which waits for the
+  // full 1.2s fade-out) — gives Scene's mount + WebGL init a head start
+  // while the fade is still playing instead of starting cold once it ends.
+  onClickStart: () => void
+}) {
   const [phase, setPhase] = useState<'hidden' | 'visible' | 'leaving'>('hidden')
   const isMobile = useIsMobile()
 
@@ -15,6 +24,7 @@ export default function IntroScreen({ onEnter }: { onEnter: () => void }) {
   const enter = () => {
     if (phase !== 'visible') return
     setPhase('leaving')
+    onClickStart()
     setTimeout(onEnter, 1200)
   }
 
@@ -53,6 +63,20 @@ export default function IntroScreen({ onEnter }: { onEnter: () => void }) {
         transition: 'opacity 1s ease 0.1s, transform 1s ease 0.1s',
       }}>
         Anjali Zalani
+      </div>
+
+      <div style={{
+        fontSize: 'clamp(9px, 1.1vw, 12px)',
+        fontWeight: 300, color: 'rgba(255,255,255,0.3)',
+        letterSpacing: '0.03em', textTransform: 'none',
+        fontFamily: 'var(--font-dm-sans)',
+        textAlign: 'center',
+        marginTop: '6px',
+        opacity: phase === 'visible' ? 1 : 0,
+        transform: phase === 'visible' ? 'translateY(0)' : 'translateY(8px)',
+        transition: 'opacity 1s ease 0.2s, transform 1s ease 0.2s',
+      }}>
+        an-jelly
       </div>
 
       <div style={{

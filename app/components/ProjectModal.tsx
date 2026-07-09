@@ -29,6 +29,19 @@ export default function ProjectModal({
     return () => window.removeEventListener('keydown', onKey)
   }, [onClose])
 
+  // Body-scroll-lock while open. Without this, scroll input landing on the
+  // backdrop (not just inside the panel's own scroll region) still moved
+  // window.scrollY, silently advancing chapter navigation behind the
+  // modal — a real bug on its own, separate from the panel's own
+  // overscroll-chaining fixed via overscrollBehavior below.
+  useEffect(() => {
+    const prevOverflow = document.body.style.overflow
+    document.body.style.overflow = 'hidden'
+    return () => {
+      document.body.style.overflow = prevOverflow
+    }
+  }, [])
+
   const overlayStyle: React.CSSProperties = {
     position: 'fixed',
     inset: 0,
@@ -49,6 +62,7 @@ export default function ProjectModal({
     border: `1px solid ${color}33`,
     borderRadius: '16px',
     overflow: 'hidden auto',
+    overscrollBehavior: 'contain',
     position: 'relative',
   }
 

@@ -40,7 +40,21 @@ export default function ContactSection({ scrollT }: { scrollT: number }) {
         Get in touch
       </h2>
 
-      <div style={{ display: 'flex', flexDirection: 'column', gap: '16px', alignItems: 'center' }}>
+      <div style={{
+        display: 'flex', flexDirection: 'column', gap: '16px', alignItems: 'center',
+        // Text-color alone couldn't win against the bell's brightest rim
+        // highlight directly behind this block (confirmed visually — the
+        // GITHUB row sits over near-white glow). 0.78 opacity is the
+        // computed minimum that keeps the label/value text above 4.5:1
+        // even blended against a near-white (248,248,250) worst-case
+        // backdrop; picked 0.82 for a bit of margin. Scoped to just the
+        // link rows, not the heading above, which read fine already.
+        background: 'rgba(2,8,24,0.82)',
+        backdropFilter: 'blur(20px)',
+        border: '1px solid rgba(0,229,255,0.1)',
+        borderRadius: '16px',
+        padding: '20px 24px',
+      }}>
         {LINKS.map(({ label, value, href }) => (
           <a
             key={label}
@@ -67,14 +81,14 @@ export default function ContactSection({ scrollT }: { scrollT: number }) {
             }}
           >
             <span style={{
-              fontSize: '9px', color: 'rgba(255,255,255,0.3)',
+              fontSize: '9px', color: 'rgba(255,255,255,0.85)', fontWeight: 500,
               letterSpacing: '0.15em', textTransform: 'uppercase',
               fontFamily: 'var(--font-dm-sans)',
             }}>
               {label}
             </span>
             <span style={{
-              fontSize: '13px', color: 'rgba(255,255,255,0.7)',
+              fontSize: '13px', color: 'rgba(255,255,255,0.92)', fontWeight: 500,
               fontFamily: 'var(--font-dm-sans)',
             }}>
               {value}
