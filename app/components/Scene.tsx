@@ -39,7 +39,7 @@ export default function Scene() {
 
       {!isMobile && (
         <EffectComposer>
-          <Bloom intensity={1.8} luminanceThreshold={0.15} luminanceSmoothing={0.9} mipmapBlur />
+          <Bloom intensity={0.9} luminanceThreshold={0.35} luminanceSmoothing={0.85} mipmapBlur />
           <Vignette offset={0.3} darkness={0.6} blendFunction={BlendFunction.NORMAL} />
           <ChromaticAberration offset={[0.0006, 0.0006]} blendFunction={BlendFunction.NORMAL} />
         </EffectComposer>
