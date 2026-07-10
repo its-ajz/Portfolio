@@ -52,7 +52,7 @@ if (isMobile) {
         </div>
       </div>
       <p style={{ fontSize: '12px', color: 'rgba(255,255,255,0.55)', lineHeight: 1.6, fontFamily: 'var(--font-dm-sans)' }}>
-        I design experiences you can step inside: from Apple Vision Pro spatial systems to large-scale physical installations.
+        I design experiences you can step inside: from Apple Vision Pro spatial systems to large-scale physical installations. Student at USC's Iovine and Young Academy. Studying Arts,Technology, and the Business of Innovation with a minor in AI Applications.
       </p>
     </div>
   )
@@ -145,7 +145,7 @@ if (isMobile) {
         lineHeight: 1.75,
         fontFamily: 'var(--font-dm-sans)',
         }}>
-        Student at USC's Iovine and Young Academy. Studying Arts,Technology, and the Business of Innovation with a minor in AI Applications. Currently exploring immersive VR worlds, spatial design, and interactive storytelling. Open to internships and collaborations in XR and experience design.
+        Student at USC's Iovine and Young Academy studying Arts, Technology, and the Business of Innovation with a minor in AI Applications. Currently exploring immersive VR worlds, spatial design, and interactive storytelling. Open to internships and collaborations in XR and experience design.
         </p>
     </div>
   )
