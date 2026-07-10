@@ -145,7 +145,7 @@ if (isMobile) {
         lineHeight: 1.75,
         fontFamily: 'var(--font-dm-sans)',
         }}>
-        Student at USC's Iovine and Young Academy. Currently exploring immersive VR worlds, spatial design, and interactive storytelling. Open to internships and collaborations in XR and experience design.
+        Student at USC's Iovine and Young Academy. Studying Arts,Technology, and the Business of Innovation with a minor in AI Applications. Currently exploring immersive VR worlds, spatial design, and interactive storytelling. Open to internships and collaborations in XR and experience design.
         </p>
     </div>
   )
